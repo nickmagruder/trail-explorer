@@ -17,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 app.get('/', getHomepage);
+app.post('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
@@ -27,6 +28,20 @@ function getHomepage(req, res){
   res.send('index.ejs');
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
+}
+
+function createProfile(req, res){
+  const username = require('./data/user.json');
+  // const instanceOfUsername = new User (username);
+  const sqlArray = [username.username, username.city, username.us_state, username.miles_hiked];
+  const sql = 'INSERT INTO userID (username), city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
+  
+  res.send('index.ejs', {user:instanceOfUsername});
+
+// -- 1. change users and trails from .sql to .json
+// -- 2. require them in to server
+// -- 3. in user call change data type to json
+// -- 4.
 }
 
 function getProfile(req, res){
@@ -51,8 +66,6 @@ function getSearches(req, res){
   //start by using default location of profile to render trails by calling api
   //Offer ability to input new location
 }
-
-
 
 
 app.use('*', (req, res) => res.status(404).send('Route you are looking for cannot be found'));
