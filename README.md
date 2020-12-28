@@ -19,6 +19,12 @@ An application to find and save hikes that can also be used to tally total miles
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Libraries, Frameworks & Packages
+  "dotenv": "^8.2.0",
+  "ejs": "^3.1.5",
+  "express": "^4.17.1",
+  "method-override": "^3.0.0",
+  "pg": "^8.5.1",
+  "superagent": "^6.1.0"
 
 ## API Endpoints
 
