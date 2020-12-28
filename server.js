@@ -17,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 app.get('/', getHomepage);
+app.post('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
@@ -27,6 +28,20 @@ function getHomepage(req, res){
   res.send('index.ejs');
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
+}
+
+function createProfile(req, res){
+  const username = require('./data/user.json');
+  // const instanceOfUsername = new User (username);
+  const sqlArray = [username.username, username.city, username.us_state, username.miles_hiked];
+  const sql = 'INSERT INTO userID (username), city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
+  
+  res.send('index.ejs', {user:instanceOfUsername});
+
+// -- 1. change users and trails from .sql to .json
+// -- 2. require them in to server
+// -- 3. in user call change data type to json
+// -- 4.
 }
 
 function getProfile(req, res){
@@ -95,29 +110,6 @@ function TrailConstructor(trailObject) {
   this.condition_date = trailObject.conditionDate.slice(0, 10);
   this.condition_time = trailObject.conditionDate.slice(11); */
 }
-
-// Copy of the schema:
-/* CREATE TABLE favorite(
-  ID SERIAL PRIMARY KEY,
-  username FOREIGN KEY,
-  completed VARCHAR(255),
-  date_completed DATE,
-  lat NUMBER,
-  lon NUMBER,
-  trail VARCHAR(255),
-  city VARCHAR(255),
-  summary TEXT,
-  distance NUMBER,
-  rating NUMBER,
-  elevation NUMBER,
-  difficulty VARCHAR(255),
-  trail_url VARCHAR(255),
-  img_url VARCHAR(255),
-  notes VARCHAR(255)
-); */
-
-
-// NICKTODO: user constructor
 
 
 app.use('*', (req, res) => res.status(404).send('Route you are looking for cannot be found'));
