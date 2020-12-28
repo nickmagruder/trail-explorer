@@ -27,11 +27,12 @@ An application to find and save hikes that can also be used to tally total miles
   "superagent": "^6.1.0"
 
 ## API Endpoints
+TRAIL_API_KEY = 200990745-be2dc5ed83527358c3279f1cac1cdfba
 
 ## Database Schema
 
 ## Change Log
-01-01-2001 4:59pm - 
+12-28-2020 11:00am - Initial server build out
 
 ## Credits and Collaborations
 Give credit (and a link) to other people or resources that helped you build this application.
