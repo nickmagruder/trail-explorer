@@ -1,0 +1,207 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../assets/garrett-parker-2jyxADdd2t4-unsplash.jpg);
+  background-size: cover;
+  background-position-x: 50%;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 5fr 2fr 18fr 4fr 9fr 9fr 3fr;
+  grid-template-areas:
+  "a b b b b c"
+  "d d d d d d"
+  "e e e e e e"
+  "f f f f f f"
+  "g g g h h h"
+  "i i i j j j"
+  "k k k k k k";
+}
+
+div {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+.header i {
+  font-size: 2.4rem;
+}
+
+.center-icon {
+  font-size: 4rem;
+}
+
+#heading {
+  grid-area: b;
+  font-size: 2rem;
+}
+
+#icon {
+  grid-area: a;
+
+}
+
+#menu-btn {
+  grid-area: c;
+
+}
+
+#user {
+  grid-area: d;
+  font-size:1.5rem;
+}
+
+#upper-img {
+  grid-area: e;
+  display: block;
+
+}
+
+#quote {
+  grid-area: f;
+
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#quote p {
+  margin: 5%;
+}
+
+#search {
+  grid-area: g;
+
+}
+
+#profile {
+  grid-area: h;
+
+}
+
+#favorites {
+  grid-area: i;
+
+}
+
+#about {
+  grid-area: j;
+
+}
+
+#foot {
+  grid-area: k;
+
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* .nav-hide {
+  display: none;
+}
+
+.nav-show {
+  display: block;
+} */
+
+
+#menu {
+  display: none;
+  float:right;
+  width: 40%;
+  height: 89%;
+  background-color:rgba(185, 185, 185, 0.418);
+  border-top-left-radius: .8rem;
+  border-bottom-left-radius: .8rem;
+  color: black;
+}
+
+#menu ul {
+  height:95%;
+  width:95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+#menu a {
+  color: black;
+  font-weight: bold;
+}
+
+
+.left-icon {
+  margin-right: 0.5rem;
+}
+
+.right-icon {
+  margin-left: 0.5rem;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.nav-square {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+  margin: 40% auto;
+  width: 75%;
+}
+
+
+.modal {
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content input {
+  margin: .5rem auto;
+}
+
+.modal-content span {
+  margin: auto .7rem;
+  font-style: italic;
+}
+
+.modal-btn {
+  margin-top: 1.5rem;
+  padding: .3rem;
+}
+
+.modal-content {
+	background-color:#0a36029f;
+	padding: 24px 12px;
+	border: 1px solid white;
+	border-radius: 12px;
+	color: white;
+	text-align: center;
+}

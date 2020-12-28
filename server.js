@@ -24,7 +24,8 @@ app.post('/search', getSearches);
 app.post('/search/save', saveTrail);
 
 function getHomepage(req, res){
-  res.send('index.ejs');
+  const emptyName = 'Bob';
+  res.render('index.ejs', {user: emptyName});
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
