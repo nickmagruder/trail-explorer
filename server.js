@@ -20,12 +20,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', getIndexpage);
 app.post('/home', createProfile);
+app.post('/home/existing', getProfile);
+app.get('/home/:username', getHomepage);
 // app.post('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
+app.get('/profile', generateProfilePage)
 
 
 function getIndexpage(req, res) {
@@ -35,31 +38,40 @@ function getIndexpage(req, res) {
 }
 
 function getHomepage(req, res) {
-  const emptyName = 'Bob';
-  res.render('pages/home.ejs', { user: emptyName });
+  res.render('pages/home.ejs', { userInfo: req.params});
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
 
 function createProfile(req, res) {
   const user = req.body;
-  // const instanceOfUsername = new User (username);
-  client.query(`SELECT * FROM userID WHERE username = '${req.body.username}'`)
+  client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
     .then(results => {
+
       if(!results.rows[0]){
-        const sqlArray = [user.username, user.city, user.state, 0];
+        const sqlArray = [user.username, user.city, user.us_state, 0];
+
         const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
         client.query(sql, sqlArray);
-        res.render('pages/home.ejs', {userInfo: user});
-      } else{
+        res.render('pages/home.ejs', { userInfo: user });
+      } else {
         res.redirect('/');
       }
     });
 }
 
 function getProfile(req, res) {
-  //select profile link on menu or homepage
-  //populate profile page based on login
+  const user = req.body;
+  console.log(user);
+  client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
+    .then(results => {
+      if(!results.rows[0]){
+        res.redirect('/');
+      } else{
+        const userInfo = results.rows[0];
+        res.render('pages/home.ejs', {userInfo: userInfo});
+      }
+    });
 }
 
 function saveTrail(req, res) {
@@ -102,7 +114,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.render('pages/results.ejs', {trails: TrailData, userInfo: queryUser});
+      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser });
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
@@ -110,6 +122,18 @@ function getSearches(req, res) {
     });
 }
 
+function generateProfilePage(req, res) {
+  const ProfileUsername = 'iamnotatgregs';
+  client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+    .then(result => {
+      const foreignIDname = result.rows[0].id;
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
+    .then(result => {
+      let savedTrails = result.rows;
+      res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: foreignIDname });
+    })
+  })
+}
 
 
 
