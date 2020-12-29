@@ -15,6 +15,13 @@ $searchBtn.click(() => {
   $searchModal.show();
 });
 
-$detailBtn.click(() => {
-  $detailModal.show();
+$('.result-cards').on('click', '.trail-card', e => {
+  let $selectedCard = $(e.target).closest('div');
+  console.log($selectedCard);
+  let $cardModal = $selectedCard.find('.modal');
+  $cardModal.show();
+});
+
+$('.close').on('click', e=>{
+  $('.modal').hide();
 });
