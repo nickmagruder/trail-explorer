@@ -148,7 +148,7 @@ div {
   height: 6vh;
 }
 
-/* #detail-modal {
+#detail-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -169,21 +169,9 @@ div {
   width: 75%;
 }
 
-#trail-save {
-  display: none;
+.detail-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.detail-modal-content span {
-  margin: auto .7rem;
-}
-
-.close {
-  float: right;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.save-btn {
-  margin-top: 1.5rem;
-  display: block;
-} */
