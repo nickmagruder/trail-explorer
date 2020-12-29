@@ -32,6 +32,7 @@ a:visited {
 
 #user {
   font-size:1.5rem;
+  text-shadow: 0px 0px 4px black;
 }
 
 #quote {
@@ -44,6 +45,7 @@ a:visited {
 
 #menu {
   background-color: rgba(0, 0, 0, 0.8);
+  border:2px solid white;
   border-top-left-radius: .8rem;
   border-bottom-left-radius: .8rem;
   color: white;
@@ -103,4 +105,30 @@ a:visited {
 	border-radius: 12px;
 	color: white;
 	text-align: center;
+}
+
+.trail-rating {
+
+}
+
+.trail-rating i {
+  color: gold;
+}
+
+.trail-name {
+  text-shadow:0px 0px 3px black;
+}
+
+.trail-id {
+  font-size: .7rem;
+  font-style: italic;
+}
+
+.trail-city {
+  font-size: .8rem;
+  font-style: oblique;
+}
+
+.trail-distance {
+
 }

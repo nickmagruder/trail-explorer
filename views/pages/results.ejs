@@ -26,10 +26,23 @@
           <% trails.forEach((trail)=> { %>
             <%- include('../partials/trail-card', {trail: trail}) %>
               <% }) %>
+                <div class="trail-card spacer"></div>
         </section>
 
+        <!-- Search modal -->
 
+        <div id="search-modal" class="modal">
 
+          <div id="search-content" class="search-modal-content">
+            <form action="/search" method="GET">
+              <label>Search Location
+                <input type="text" name="location" placeholder="current location" />
+              </label><br>
+              <input type="submit" value="Search Now" class="modal-btn" />
+            </form>
+          </div>
+
+        </div>
     </main>
     <%- include('../partials/footer') %>
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"
