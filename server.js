@@ -11,9 +11,11 @@ const PORT = process.env.PORT || 9999;
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', error => console.error(error));
 
+const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
+
 app.use(methodOverride('_method'));
 app.use(express.static('./public'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', getHomepage);
@@ -25,14 +27,14 @@ app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
 
-function getHomepage(req, res){
+function getHomepage(req, res) {
   const emptyName = 'Bob';
-  res.render('index.ejs', {user: emptyName});
+  res.render('index.ejs', { user: emptyName });
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
 
-function createProfile(req, res){
+function createProfile(req, res) {
   const username = require('./data/user.json');
   // const instanceOfUsername = new User (username);
 
@@ -41,18 +43,20 @@ function createProfile(req, res){
   client.query(sql, sqlArray);
   res.redirect(`/${username[0].username}`);
 
-// -- 1. change users and trails from .sql to .json
-// -- 2. require them in to server
-// -- 3. in user call change data type to json
-// -- 4.
+  res.send('index.ejs', { user: instanceOfUsername });
+
+  // -- 1. change users and trails from .sql to .json
+  // -- 2. require them in to server
+  // -- 3. in user call change data type to json
+  // -- 4.
 }
 
-function getProfile(req, res){
+function getProfile(req, res) {
   //select profile link on menu or homepage
   //populate profile page based on login
 }
 
-function saveTrail(req, res){
+function saveTrail(req, res) {
   //save trail to sql database for user profile
   //repopulate search page
   const username = 1;
@@ -65,45 +69,52 @@ function saveTrail(req, res){
   res.redirect('/search');
 }
 
-function deleteTrail(req, res){
+function deleteTrail(req, res) {
   //delete trail from favorites
 }
 
-function updateTrail(req, res){
+function updateTrail(req, res) {
   //update trail information
 }
 
 
 
-
-// Seattle lat-long: 47.6038, -122.3300
-function getSearches(req, res){
-  //Offer ability to input new location
-
-  /*  const lat = req.query.latitude;
-    const long = req.query.longitude; */
-
-    const lat = 47.6038
-    const long = -122.3300
-    const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
-    // console.log(TRAIL_API_KEY);
-    const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
-
-    return superagent.get(urlTrails)
-        .then(trailEntry => {
-            let trailsArray = trailEntry.body.trails;
-            let TrailData = trailsArray.map(trail => {
-                return new TrailConstructor(trail);
-            })
-            res.send(TrailData);
-            // console.log(TrailData);
-        })
-        .catch(error => {
-            res.status(500).send('Sorry, an error has occured');
-            console.log(error, '500 Error')
-        });
+function getSearches(req, res) {
+  // const query = req.query.city
+  const query = 'Seattle, Washington'
+  superagent.get(`https://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${query}&format=json`)
+    .then(result => {
+      const location = new LocationConstructor(result.body[0], query);
+      const lat = location.latitude;
+      const long = location.longitude;
+      const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
+      const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
+      return superagent.get(urlTrails)
+    })
+    .then(trailEntry => {
+      let trailsArray = trailEntry.body.trails;
+      let TrailData = trailsArray.map(trail => {
+        return new TrailConstructor(trail);
+      })
+      res.send(TrailData);
+    })
+    .catch(error => {
+      res.status(500).send('Sorry, an error has occured');
+      console.log(error, '500 Error')
+    });
 };
 
+
+
+
+// Constructors
+
+function LocationConstructor(locationObject, reqCity) {
+  this.search_query = reqCity;
+  this.formatted_query = locationObject.display_name;
+  this.latitude = locationObject.lat;
+  this.longitude = locationObject.lon;
+}
 
 
 function TrailConstructor(trailObject) {
@@ -119,9 +130,9 @@ function TrailConstructor(trailObject) {
   this.difficulty = trailObject.difficulty;
   this.trail_url = trailObject.url;
   this.img_url = trailObject.imgMedium;
-/*   this.conditions = trailObject.conditionDetails;
-  this.condition_date = trailObject.conditionDate.slice(0, 10);
-  this.condition_time = trailObject.conditionDate.slice(11); */
+  /*   this.conditions = trailObject.conditionDetails;
+    this.condition_date = trailObject.conditionDate.slice(0, 10);
+    this.condition_time = trailObject.conditionDate.slice(11); */
 }
 
 
