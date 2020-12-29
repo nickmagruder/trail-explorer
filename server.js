@@ -17,12 +17,13 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 app.get('/', getHomepage);
-app.post('/create_profile', createProfile);
+app.get('/home');
+app.get('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
-app.post('/search/save', saveTrail);
+app.get('/search/save', saveTrail);
 
 function getHomepage(req, res){
   const emptyName = 'Bob';
@@ -34,10 +35,11 @@ function getHomepage(req, res){
 function createProfile(req, res){
   const username = require('./data/user.json');
   // const instanceOfUsername = new User (username);
-  const sqlArray = [username.username, username.city, username.us_state, username.miles_hiked];
-  const sql = 'INSERT INTO userID (username), city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
 
-  res.redirect('index.ejs', {user:instanceOfUsername});
+  const sqlArray = [username[0].username, username[0].city, username[0].us_state, username[0].miles_hiked];
+  const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
+  client.query(sql, sqlArray);
+  res.redirect(`/${username[0].username}`);
 
 // -- 1. change users and trails from .sql to .json
 // -- 2. require them in to server
@@ -53,6 +55,14 @@ function getProfile(req, res){
 function saveTrail(req, res){
   //save trail to sql database for user profile
   //repopulate search page
+  const username = 1;
+  // const trail = req.body;
+  const trail = require('./data/trails.json');
+
+  const sqlArray = [username, trail[0].latitude, trail[0].longitude, trail[0].name, trail[0].summary, trail[0].difficulty, trail[0].stars, trail[0].ascent, trail[0].length, trail[0].imgMedium, trail[0].url];
+  const sql = 'INSERT INTO favorite (username, lat, lon, trail, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
+  client.query(sql, sqlArray);
+  res.redirect('/search');
 }
 
 function deleteTrail(req, res){
@@ -72,26 +82,28 @@ function getSearches(req, res){
 
   /*  const lat = req.query.latitude;
     const long = req.query.longitude; */
-  const lat = 47.6038;
-  const long = -122.3300;
-  const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
-  console.log(TRAIL_API_KEY);
-  const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
 
-  return superagent.get(urlTrails)
-    .then(trailEntry => {
-      let trailsArray = trailEntry.body.trails;
-      let TrailData = trailsArray.map(trail => {
-        return new TrailConstructor(trail);
-      });
-      res.send(TrailData);
-      console.log(TrailData);
-    })
-    .catch(error => {
-      res.status(500).send('Sorry, an error has occured');
-      console.log(error, '500 Error');
-    });
-}
+    const lat = 47.6038
+    const long = -122.3300
+    const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
+    // console.log(TRAIL_API_KEY);
+    const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
+
+    return superagent.get(urlTrails)
+        .then(trailEntry => {
+            let trailsArray = trailEntry.body.trails;
+            let TrailData = trailsArray.map(trail => {
+                return new TrailConstructor(trail);
+            })
+            res.send(TrailData);
+            // console.log(TrailData);
+        })
+        .catch(error => {
+            res.status(500).send('Sorry, an error has occured');
+            console.log(error, '500 Error')
+        });
+};
+
 
 
 function TrailConstructor(trailObject) {

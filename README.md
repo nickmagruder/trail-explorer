@@ -12,6 +12,7 @@ An application to find and save hikes that can also be used to tally total miles
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+To get this application running on a computer a user must download the repository and use npm to install the dependencies. They must also create a .env file that contains a LocationIQ API key and Hiking Project API key. 
 
 ## User Instructions
 
