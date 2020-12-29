@@ -35,6 +35,7 @@ function getHomepage(req, res){
 function createProfile(req, res){
   const username = require('./data/user.json');
   // const instanceOfUsername = new User (username);
+
   const sqlArray = [username[0].username, username[0].city, username[0].us_state, username[0].miles_hiked];
   const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
   client.query(sql, sqlArray);
@@ -79,8 +80,9 @@ function updateTrail(req, res){
 function getSearches(req, res){
   //Offer ability to input new location
 
-/*  const lat = req.query.latitude;
+  /*  const lat = req.query.latitude;
     const long = req.query.longitude; */
+
     const lat = 47.6038
     const long = -122.3300
     const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
@@ -101,6 +103,7 @@ function getSearches(req, res){
             console.log(error, '500 Error')
         });
 };
+
 
 
 function TrailConstructor(trailObject) {
