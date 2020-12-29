@@ -38,3 +38,7 @@ GEOCODE_API_KEY = pk.ec7dd268e7db863b8ee3de2dc5489245
 
 ## Credits and Collaborations
 Give credit (and a link) to other people or resources that helped you build this application.
+
+TODO
+<!-- exit button on search modal
+radio button functionality on profile on index page + different function to query for existing profile -->
