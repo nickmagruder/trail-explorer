@@ -86,7 +86,6 @@ function updateTrail(req, res) {
 
 
 function getSearches(req, res) {
-  console.log(req.query.userInfo);
   const query = req.query.location;
   const queryUser = req.query.userInfo;
   superagent.get(`https://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${query}&format=json`)

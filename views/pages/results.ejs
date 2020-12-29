@@ -18,47 +18,49 @@
     </header>
     <main>
       <div id="user"><em>
-          <%= userInfo %>
+          How about one of these trails, <%= userInfo %>?
         </em></div>
       <%- include('../partials/navigation') %>
-        <section id="upper-img">
+        <section id="upper-img" class="result-cards">
 
           <% trails.forEach((trail)=> { %>
             <%- include('../partials/trail-card', {trail: trail}) %>
+
+
               <!-- Detail modal -->
 
-              <!-- <div id="detail-modal" class="modal">
-                    
-                              <div id="detail-content" class="detail-modal-content">
-                                <span class="close">&times;</span>
-                                <img src="<%= trail.img_url %>" alt="<%= trail.trail %>">
-                                <h2>
-                                  <%= trail.trail %>
-                                </h2>
-                                <p><em>"<%= trail.summary %>"</em></p>
-                                <p>Located in <%= trail.city %>, this <%= trail.difficulty %>, <%= trail.distance %> mile hike is
-                                        rated <%= trail.rating %> out of 5 stars.</p>
-                                <a href="<%= trail.trail_url %>">
-                                  <%= trail.trail %> Website
-                                </a>
-                                <form id="trail-save" action="/search/save" method="POST">
-                                  <input type="hidden" name="trail_id" value="trail.trailID" />
-                                  <input type="hidden" name="lat" value="trail.lat" />
-                                  <input type="hidden" name="lon" value="trail.lon" />
-                                  <input type="hidden" name="trail_name" value="trail.trail" />
-                                  <input type="hidden" name="city" value="trail.city" />
-                                  <input type="hidden" name="summary" value="trail.summary" />
-                                  <input type="hidden" name="distance" value="trail.distance" />
-                                  <input type="hidden" name="rating" value="trail.rating" />
-                                  <input type="hidden" name="elevation" value="trail.elavation" />
-                                  <input type="hidden" name="difficulty" value="trail.difficulty" />
-                                  <input type="hidden" name="trail_url" value="trail.trail_url" />
-                                  <input type="hidden" name="img_url" value="trail.img_url" />
-                                  <input type="submit" value="Save to Favorites" id="save-btn" />
-                                </form>
-                              </div>
-                    
-                            </div> -->
+              <div id="detail-modal" class="modal">
+
+                <div id="detail-content" class="detail-modal-content">
+                  <span class="close">&times;</span>
+                  <img src="<%= trail.img_url %>" alt="<%= trail.trail %>">
+                  <h2>
+                    <%= trail.trail %>
+                  </h2>
+                  <p><em>"<%= trail.summary %>"</em></p>
+                  <p>Located in <%= trail.city %>, this <%= trail.difficulty %>, <%= trail.distance %> mile hike is
+                          rated <%= trail.rating %> out of 5 stars.</p>
+                  <a href="<%= trail.trail_url %>">
+                    <%= trail.trail %> Website
+                  </a>
+                  <form id="trail-save" action="/search/save" method="POST">
+                    <input type="hidden" name="trail_id" value="trail.trailID" />
+                    <input type="hidden" name="lat" value="trail.lat" />
+                    <input type="hidden" name="lon" value="trail.lon" />
+                    <input type="hidden" name="trail_name" value="trail.trail" />
+                    <input type="hidden" name="city" value="trail.city" />
+                    <input type="hidden" name="summary" value="trail.summary" />
+                    <input type="hidden" name="distance" value="trail.distance" />
+                    <input type="hidden" name="rating" value="trail.rating" />
+                    <input type="hidden" name="elevation" value="trail.elavation" />
+                    <input type="hidden" name="difficulty" value="trail.difficulty" />
+                    <input type="hidden" name="trail_url" value="trail.trail_url" />
+                    <input type="hidden" name="img_url" value="trail.img_url" />
+                    <input type="submit" value="Save to Favorites" id="save-btn" />
+                  </form>
+                </div>
+
+              </div>
               <% }) %>
                 <div class="trail-card spacer"></div>
         </section>
