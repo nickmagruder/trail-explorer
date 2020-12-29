@@ -18,7 +18,7 @@
     </header>
     <main>
       <div id="user"><em>
-          Bob
+          <%= userInfo %>
         </em></div>
       <%- include('../partials/navigation') %>
         <section id="upper-img">
@@ -42,18 +42,18 @@
                                   <%= trail.trail %> Website
                                 </a>
                                 <form id="trail-save" action="/search/save" method="POST">
-                                  <input type="text" name="trail_id" value="trail.trailID" />
-                                  <input type="text" name="lat" value="trail.lat" />
-                                  <input type="text" name="lon" value="trail.lon" />
-                                  <input type="text" name="trail_name" value="trail.trail" />
-                                  <input type="text" name="city" value="trail.city" />
-                                  <input type="text" name="summary" value="trail.summary" />
-                                  <input type="text" name="distance" value="trail.distance" />
-                                  <input type="text" name="rating" value="trail.rating" />
-                                  <input type="text" name="elevation" value="trail.elavation" />
-                                  <input type="text" name="difficulty" value="trail.difficulty" />
-                                  <input type="text" name="trail_url" value="trail.trail_url" />
-                                  <input type="text" name="img_url" value="trail.img_url" />
+                                  <input type="hidden" name="trail_id" value="trail.trailID" />
+                                  <input type="hidden" name="lat" value="trail.lat" />
+                                  <input type="hidden" name="lon" value="trail.lon" />
+                                  <input type="hidden" name="trail_name" value="trail.trail" />
+                                  <input type="hidden" name="city" value="trail.city" />
+                                  <input type="hidden" name="summary" value="trail.summary" />
+                                  <input type="hidden" name="distance" value="trail.distance" />
+                                  <input type="hidden" name="rating" value="trail.rating" />
+                                  <input type="hidden" name="elevation" value="trail.elavation" />
+                                  <input type="hidden" name="difficulty" value="trail.difficulty" />
+                                  <input type="hidden" name="trail_url" value="trail.trail_url" />
+                                  <input type="hidden" name="img_url" value="trail.img_url" />
                                   <input type="submit" value="Save to Favorites" id="save-btn" />
                                 </form>
                               </div>
@@ -66,12 +66,12 @@
         <!-- Search modal -->
 
         <div id="search-modal" class="modal">
-
           <div id="search-content" class="search-modal-content">
             <form action="/search" method="GET">
               <label>Search Location
-                <input type="text" name="location" placeholder="current location" />
+                <input type="text" name="location" />
               </label><br>
+              <input type="hidden" name="userInfo" value="<%= userInfo.username %>">
               <input type="submit" value="Search Now" class="modal-btn" />
             </form>
           </div>
