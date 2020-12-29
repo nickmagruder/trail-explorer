@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/base.css">
-    <link rel="stylesheet" href="../style/layout.css">
-    <link rel="stylesheet" href="../style/modules.css">
-    <script src="https://kit.fontawesome.com/4fc1b5d5ea.js" crossorigin="anonymous"></script>
-    <title>Trail Search</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style/reset.css">
+  <link rel="stylesheet" href="../style/base.css">
+  <link rel="stylesheet" href="../style/layout.css">
+  <link rel="stylesheet" href="../style/modules.css">
+  <script src="https://kit.fontawesome.com/4fc1b5d5ea.js" crossorigin="anonymous"></script>
+  <title>Trail Search</title>
+</head>
 
-  <body>
-    <main>
-      <%- include('partials/header', {user: user}) %>
-        <section id="upper-img">
-          <%- include('partials/navigation') %>
-        </section>
-        <div id="search-modal" class="modal">
-
-          <div id="content" class="search-modal-content">
-            <form action="/createprofile" method="POST">
-              <label>Search Location
-                <input type="text" name="location" placeholder="current location" />
-              </label><br>
-              <input type="submit" value="Search" class="modal-btn" />
-            </form>
-          </div>
-
-        </div>
-        <div id="quote">
-          <p><em>"After a day’s walk, everything has twice its usual value."</em> - G.M. Trevelyan</p>
+<body>
+  <main>
+    <%- include('partials/header', {user: user}) %>
+      <section id="upper-img">
+        <%- include('partials/navigation') %>
+      </section>
+      <div id="search-modal" class="modal">
+        <div id="content" class="search-modal-content">
+          <form action="/search" method="GET">
+            <label>Search
+              <input type="text" name="location" placeholder="current location" />
+            </label><br>
+            <input type="submit" value="Search" class="modal-btn" />
+          </form>
         </div>
 
-        <%- include('partials/footer') %>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
-  </body>
+      </div>
+      <div id="quote">
+        <p><em>"After a day’s walk, everything has twice its usual value."</em> - G.M. Trevelyan</p>
+      </div>
+
+      <%- include('partials/footer') %>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
 
 </html>
