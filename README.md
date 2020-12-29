@@ -28,6 +28,7 @@ An application to find and save hikes that can also be used to tally total miles
 
 ## API Endpoints
 TRAIL_API_KEY = 200990745-be2dc5ed83527358c3279f1cac1cdfba
+GEOCODE_API_KEY = pk.ec7dd268e7db863b8ee3de2dc5489245
 
 ## Database Schema
 
