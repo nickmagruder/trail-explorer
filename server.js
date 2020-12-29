@@ -87,8 +87,7 @@ function updateTrail(req, res) {
 
 
 function getSearches(req, res) {
-  // const query = req.query.city
-  const query = 'Seattle, Washington';
+  const query = req.query.location;
   superagent.get(`https://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${query}&format=json`)
     .then(result => {
       const location = new LocationConstructor(result.body[0], query);
@@ -103,6 +102,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
+      console.log(TrailData)
       res.send(TrailData);
     })
     .catch(error => {
