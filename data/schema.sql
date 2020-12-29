@@ -7,7 +7,7 @@ CREATE TABLE userID(
   username VARCHAR(255),
   city VARCHAR(255),
   us_state VARCHAR(255),
-  miles_hiked INT
+  miles_hiked DECIMAL
 );
 
 CREATE TABLE favorite(
@@ -16,14 +16,14 @@ CREATE TABLE favorite(
   FOREIGN KEY (username) REFERENCES userID(ID),
   completed VARCHAR(255),
   date_completed DATE,
-  lat INT,
-  lon INT,
+  lat DECIMAL,
+  lon DECIMAL,
   trail VARCHAR(255),
   city VARCHAR(255),
   summary TEXT,
-  distance INT,
-  rating INT,
-  elevation INT,
+  distance DECIMAL,
+  rating DECIMAL,
+  elevation DECIMAL,
   difficulty VARCHAR(255),
   trail_url VARCHAR(255),
   img_url VARCHAR(255),
@@ -32,5 +32,3 @@ CREATE TABLE favorite(
 
 SELECT * FROM favorite JOIN userID ON favorite.username = userID.ID
 
--- after the word foreign key needs " REFERENCES userID(ID)"
--- Run a join initially on this "SELECT * FROM favorite JOIN favorite.username = userID.ID"

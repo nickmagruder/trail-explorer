@@ -1,5 +1,4 @@
-{
-    "trails": [
+[
         {
             "id": 7005246,
             "name": "Enchantments Traverse",
@@ -19,8 +18,8 @@
             "descent": -6674,
             "high": 7795,
             "low": 1319,
-            "longitude": -120.8206,
-            "latitude": 47.5278,
+            "longitude": -120,
+            "latitude": 47,
             "conditionStatus": "All Clear",
             "conditionDetails": "Dry",
             "conditionDate": "2020-10-13 14:06:06"
@@ -250,40 +249,4 @@
             "conditionDetails": "Muddy, Snowy",
             "conditionDate": "2020-11-27 15:09:39"
         }
-    ],
-    "success": 1
-}
-
-{
-    "users": [
-        {
-            "username": Frank,
-            "city": "Seattle",
-            "us_state": "Washington",
-            "miles_hiked": 20,
-        },
-        {
-            "username": Jimbo,
-            "city": "Boston",
-            "us_state": "Massachusetts",
-            "miles_hiked": 40
-        },
-        {
-            "username": Timmy,
-            "city": "New York",
-            "us_state": "New York",
-            "miles_hiked": 0
-        },
-        {
-            "username": Tom,
-            "city": "Miami",
-            "us_state": "Florida",
-            "miles_hiked": 0
-        },
-        {
-            "username": Steve,
-            "city": "Los Angeles",
-            "us_state": "California",
-            "miles_hiked": 2
-        },
-}
+    ]

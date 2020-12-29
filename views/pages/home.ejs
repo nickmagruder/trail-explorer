@@ -15,24 +15,23 @@
   <body>
     <main>
       <%- include('partials/header', {user: user}) %>
+        <div id="user"><em>
+            <%= user %>
+          </em></div>
         <section id="upper-img">
           <%- include('partials/navigation') %>
         </section>
 
-        <!-- User name input modal -->
+        <!-- Search modal -->
 
-        <div id="user-modal" class="modal">
+        <div id="search-modal" class="modal">
 
-          <div id="user-content" class="user-modal-content">
-            <form action="/createprofile" method="POST">
-              Username <input type="text" name="username" /><br>
-              City <input type="text" name="city" placeholder="city" /><br />
-              State <input type="text" name="state" placeholder="state" />
-              <br>
-              <input type="radio" name="user-type" value="new" />New Hiker
-              <span><em>OR</em></span>
-              <input type="radio" name="user-type" value="existing" />Existing Hiker<br />
-              <input type="submit" value="Get Started" class="modal-btn" />
+          <div id="search-content" class="search-modal-content">
+            <form action="/search" method="GET">
+              <label>Search Location
+                <input type="text" name="location" placeholder="current location" />
+              </label><br>
+              <input type="submit" value="Search Now" class="modal-btn" />
             </form>
           </div>
 
