@@ -36,8 +36,8 @@ function createProfile(req, res){
   // const instanceOfUsername = new User (username);
   const sqlArray = [username.username, username.city, username.us_state, username.miles_hiked];
   const sql = 'INSERT INTO userID (username), city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
-  
-  res.send('index.ejs', {user:instanceOfUsername});
+
+  res.redirect('index.ejs', {user:instanceOfUsername});
 
 // -- 1. change users and trails from .sql to .json
 // -- 2. require them in to server
@@ -70,28 +70,28 @@ function updateTrail(req, res){
 function getSearches(req, res){
   //Offer ability to input new location
 
-/*  const lat = req.query.latitude;
+  /*  const lat = req.query.latitude;
     const long = req.query.longitude; */
-    const lat = 47.6038
-    const long = -122.3300
-    const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
-    console.log(TRAIL_API_KEY);
-    const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
+  const lat = 47.6038;
+  const long = -122.3300;
+  const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
+  console.log(TRAIL_API_KEY);
+  const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
 
-    return superagent.get(urlTrails)
-        .then(trailEntry => {
-            let trailsArray = trailEntry.body.trails;
-            let TrailData = trailsArray.map(trail => {
-                return new TrailConstructor(trail);
-            })
-            res.send(TrailData);
-            console.log(TrailData);
-        })
-        .catch(error => {
-            res.status(500).send('Sorry, an error has occured');
-            console.log(error, '500 Error')
-        });
-};
+  return superagent.get(urlTrails)
+    .then(trailEntry => {
+      let trailsArray = trailEntry.body.trails;
+      let TrailData = trailsArray.map(trail => {
+        return new TrailConstructor(trail);
+      });
+      res.send(TrailData);
+      console.log(TrailData);
+    })
+    .catch(error => {
+      res.status(500).send('Sorry, an error has occured');
+      console.log(error, '500 Error');
+    });
+}
 
 
 function TrailConstructor(trailObject) {
