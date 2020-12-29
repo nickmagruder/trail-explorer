@@ -46,7 +46,6 @@ function createProfile(req, res) {
   // const instanceOfUsername = new User (username);
   client.query(`SELECT * FROM userID WHERE username = '${req.body.username}'`)
     .then(results => {
-      console.log(results.rows);
       if(!results.rows[0]){
         const sqlArray = [user.username, user.city, user.state, 0];
         const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
@@ -87,7 +86,9 @@ function updateTrail(req, res) {
 
 
 function getSearches(req, res) {
+  console.log(req.query.userInfo);
   const query = req.query.location;
+  const queryUser = req.query.userInfo;
   superagent.get(`https://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${query}&format=json`)
     .then(result => {
       const location = new LocationConstructor(result.body[0], query);
@@ -102,7 +103,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.render('pages/results.ejs', {trails: TrailData});
+      res.render('pages/results.ejs', {trails: TrailData, userInfo: queryUser});
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
