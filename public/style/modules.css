@@ -132,3 +132,16 @@ a:visited {
 .trail-distance {
 
 }
+
+.close {
+  color:red;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
