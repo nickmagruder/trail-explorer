@@ -16,7 +16,7 @@
     <main>
       <%- include('../partials/header') %>
         <div id="user"><em>
-            <%= user %>
+            Are you ready to explore <%= userInfo.username %>?
           </em></div>
         <section id="upper-img">
           <%- include('../partials/navigation') %>
@@ -29,8 +29,9 @@
           <div id="search-content" class="search-modal-content">
             <form action="/search" method="GET">
               <label>Search Location
-                <input type="text" name="location" placeholder="current location" />
+                <input type="text" name="location" placeholder= "<%= userInfo.city %>, <%= userInfo.state %>"/>
               </label><br>
+              <input type = "hidden" value = "<%= userInfo.username %>">
               <input type="submit" value="Search Now" class="modal-btn" />
             </form>
           </div>

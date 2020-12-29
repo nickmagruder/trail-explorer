@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', getIndexpage);
-app.get('/home', getHomepage);
-app.get('/create_profile', createProfile);
+app.post('/home', createProfile);
+// app.post('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
@@ -42,20 +42,20 @@ function getHomepage(req, res) {
 }
 
 function createProfile(req, res) {
-  const username = require('./data/user.json');
+  const user = req.body;
   // const instanceOfUsername = new User (username);
-
-  const sqlArray = [username[0].username, username[0].city, username[0].us_state, username[0].miles_hiked];
-  const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
-  client.query(sql, sqlArray);
-  res.redirect(`/${username[0].username}`);
-
-  res.send('index.ejs', { user: instanceOfUsername });
-
-  // -- 1. change users and trails from .sql to .json
-  // -- 2. require them in to server
-  // -- 3. in user call change data type to json
-  // -- 4.
+  client.query(`SELECT * FROM userID WHERE username = '${req.body.username}'`)
+    .then(results => {
+      console.log(results.rows);
+      if(!results.rows[0]){
+        const sqlArray = [user.username, user.city, user.state, 0];
+        const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
+        client.query(sql, sqlArray);
+        res.render('pages/home.ejs', {userInfo: user});
+      } else{
+        res.redirect('/');
+      }
+    });
 }
 
 function getProfile(req, res) {
