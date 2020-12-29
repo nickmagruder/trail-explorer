@@ -11,10 +11,10 @@
 An application to find and save hikes that can also be used to tally total miles hiked and track progress. This will allow for personal growth by monitoring physical activity and time in nature. The application will allow you to provide yourown description and rating of each hike in addition to crowd-sourced ratings and descriptions.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
-To get this application running on a computer a user must download the repository and use npm to install the dependencies. They must also create a .env file that contains a LocationIQ API key and Hiking Project API key. 
+To get this application running on a computer a user must download the repository and use npm to install the dependencies. They must also create a .env file that contains a LocationIQ API key and Hiking Project API key. Lastly, a user must set up a postgres database and corresponding tables to match those in the schema.sql file located in the data folder.
 
 ## User Instructions
+To use this application, a user must first create a profile by entering a username,the city and state they are located in. If the user already has a profile they can utilize that to login. The user will then be taken to a landing page where they can search for new trails or visit their profile page. If the user inputs a search query they will be directed to a results page where they can see trails in the search location and will be able to add them to their favorite trails on their profile page. On the profile page the user will be able to view their favorite trails and add notes or list a trail as completed. The profile page will also show the user how many miles they have hiked based on their completed hikes.
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
