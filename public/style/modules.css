@@ -1,6 +1,7 @@
 body {
   background-image: url(../assets/garrett-parker-2jyxADdd2t4-unsplash.jpg);
   background-size: cover;
+  background-attachment: fixed;
   background-position-x: 50%;
 }
 

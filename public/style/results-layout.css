@@ -16,7 +16,7 @@ main {
   "e e e e e e"
   "e e e e e e"
   "e e e e e e"
-  "f f f f f f";
+  "e e e e e e";
 }
 
 div {
@@ -46,11 +46,15 @@ div {
 
 #upper-img {
   grid-area: e;
-  display: block;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 
 }
 
-#quote {
+/* #quote {
   grid-area: f;
 }
 
@@ -76,16 +80,22 @@ div {
 #about {
   grid-area: j;
 
-}
+} */
 
 #foot {
-  grid-area: k;
+  width: 100vw;
+  height: 6vh;
+  position: fixed;
+  top: auto;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
 #menu {
+  position: absolute;
+  left: 60%;
   display: none;
   float:right;
   width: 40%;
@@ -99,30 +109,6 @@ div {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
-
-#user-modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-.user-modal-content {
-  margin: 40% auto;
-  width: 75%;
-}
-
-.user-modal-content input {
-  margin: .5rem auto;
-}
-
-.user-modal-content span {
-  margin: auto .7rem;
 }
 
 .modal-btn {
@@ -154,10 +140,19 @@ div {
 }
 
 .trail-card {
-  width: 30%;
-  height: 40%;
+  width: 45%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  border:1px solid red;
+  border-radius: .4rem;
+  background-color: rgba(255, 228, 225, 0.541);
+}
+
+.trail-card img {
+  width: 80%;
+  height: 40%;
+  object-fit: cover;
 }

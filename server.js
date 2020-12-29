@@ -103,7 +103,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.send(TrailData);
+      res.render('pages/results.ejs', {trails: TrailData});
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
