@@ -1,0 +1,189 @@
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 10%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+  "a b b b b c";
+}
+
+main {
+  width: 100%;
+  height: 84vh;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 2fr 18fr 4fr 9fr 9fr 3fr;
+  grid-template-areas:
+  "d d d d d d"
+  "e e e e e e"
+  "e e e e e e"
+  "e e e e e e"
+  "e e e e e e"
+  "e e e e e e";
+}
+
+div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#heading {
+  grid-area: b;
+}
+
+#icon {
+  grid-area: a;
+
+}
+
+#menu-btn {
+  grid-area: c;
+
+}
+
+#user {
+  margin-top: 10vh;
+  grid-area: d;
+}
+
+#upper-img {
+  margin-bottom: 12vh;
+  grid-area: e;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+
+#foot {
+  width: 100vw;
+  height: 6vh;
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#menu {
+  position: fixed;
+  left: 60%;
+  top: 12%;
+  display: none;
+  float:right;
+  width: 40%;
+  height: 32.4vh;
+}
+
+#menu ul {
+  height:95%;
+  width:95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal-btn {
+  margin-top: 1.5rem;
+}
+
+#search-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.search-modal-content {
+  margin: 40% auto;
+  width: 75%;
+}
+
+.search-modal-content input {
+  margin: .5rem auto;
+}
+
+.search-modal-content span {
+  margin: auto .7rem;
+}
+
+.trail-card {
+  width: 45%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border:1px solid white;
+  border-radius: .4rem;
+  background-color:#0a3602c9;
+  box-shadow:3px 3px 5px black;
+  margin: .5rem 0;
+}
+
+.trail-card img {
+  width: 80%;
+  height: 40%;
+  object-fit: cover;
+}
+
+.spacer {
+  height: 6vh;
+}
+
+/* #detail-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+#detail-content img {
+  width: 50%;
+  object-fit: cover;
+}
+
+.detail-modal-content {
+  margin: 40% auto;
+  width: 75%;
+}
+
+#trail-save {
+  display: none;
+}
+
+.detail-modal-content span {
+  margin: auto .7rem;
+}
+
+.close {
+  float: right;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.save-btn {
+  margin-top: 1.5rem;
+  display: block;
+} */
