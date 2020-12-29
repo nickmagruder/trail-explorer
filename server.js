@@ -26,6 +26,7 @@ app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
+app.get('/profile', generateProfilePage)
 
 
 function getIndexpage(req, res) {
@@ -46,12 +47,12 @@ function createProfile(req, res) {
   // const instanceOfUsername = new User (username);
   client.query(`SELECT * FROM userID WHERE username = '${req.body.username}'`)
     .then(results => {
-      if(!results.rows[0]){
+      if (!results.rows[0]) {
         const sqlArray = [user.username, user.city, user.state, 0];
         const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
         client.query(sql, sqlArray);
-        res.render('pages/home.ejs', {userInfo: user});
-      } else{
+        res.render('pages/home.ejs', { userInfo: user });
+      } else {
         res.redirect('/');
       }
     });
@@ -103,7 +104,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.render('pages/results.ejs', {trails: TrailData, userInfo: queryUser});
+      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser });
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
@@ -111,6 +112,18 @@ function getSearches(req, res) {
     });
 }
 
+function generateProfilePage(req, res) {
+  const ProfileUsername = 'iamnotatgregs';
+  client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+    .then(result => {
+      const foreignIDname = result.rows[0].id;
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
+    .then(result => {
+      let savedTrails = result.rows;
+      res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: foreignIDname });
+    })
+  })
+}
 
 
 
