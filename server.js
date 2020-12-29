@@ -18,8 +18,8 @@ app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.get('/', getHomepage);
-app.get('/home');
+app.get('/', getIndexpage);
+app.get('/home', getHomepage);
 app.get('/create_profile', createProfile);
 app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
@@ -27,9 +27,16 @@ app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
 
+
+function getIndexpage(req, res) {
+  res.render('index.ejs');
+  //modal box for sign in or create new profile
+  //render new homepage with customized name and options
+}
+
 function getHomepage(req, res) {
   const emptyName = 'Bob';
-  res.render('index.ejs', { user: emptyName });
+  res.render('pages/home.ejs', { user: emptyName });
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
@@ -81,7 +88,7 @@ function updateTrail(req, res) {
 
 function getSearches(req, res) {
   // const query = req.query.city
-  const query = 'Seattle, Washington'
+  const query = 'Seattle, Washington';
   superagent.get(`https://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${query}&format=json`)
     .then(result => {
       const location = new LocationConstructor(result.body[0], query);
@@ -89,20 +96,20 @@ function getSearches(req, res) {
       const long = location.longitude;
       const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
       const urlTrails = `http://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=${TRAIL_API_KEY}&maxResults=10`;
-      return superagent.get(urlTrails)
+      return superagent.get(urlTrails);
     })
     .then(trailEntry => {
       let trailsArray = trailEntry.body.trails;
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
-      })
+      });
       res.send(TrailData);
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
-      console.log(error, '500 Error')
+      console.log(error, '500 Error');
     });
-};
+}
 
 
 
