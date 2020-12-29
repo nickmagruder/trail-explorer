@@ -3,20 +3,30 @@ body {
   height: 100vh;
 }
 
-main {
+header {
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 100%;
+  height: 10%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 5fr 2fr 18fr 4fr 9fr 9fr 3fr;
   grid-template-areas:
-  "a b b b b c"
+  "a b b b b c";
+}
+
+main {
+  width: 100%;
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 2fr 18fr 4fr 9fr 9fr 3fr;
+  grid-template-areas:
   "d d d d d d"
   "e e e e e e"
   "e e e e e e"
   "e e e e e e"
   "e e e e e e"
-  "e e e e e e";
+  "f f f f f f";
 }
 
 div {
@@ -94,8 +104,9 @@ div {
 }
 
 #menu {
-  position: absolute;
+  position: fixed;
   left: 60%;
+  top: 12%;
   display: none;
   float:right;
   width: 40%;
@@ -141,7 +152,7 @@ div {
 
 .trail-card {
   width: 45%;
-  height: 50%;
+  height: 45%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -149,6 +160,7 @@ div {
   border:1px solid red;
   border-radius: .4rem;
   background-color: rgba(255, 228, 225, 0.541);
+  margin: .5rem 0;
 }
 
 .trail-card img {

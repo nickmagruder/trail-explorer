@@ -13,17 +13,19 @@
   </head>
 
   <body>
-    <main>
+    <header>
       <%- include('../partials/header') %>
-        <div id="user"><em>
-            Bob
-          </em></div>
+    </header>
+    <main>
+      <div id="user"><em>
+          Bob
+        </em></div>
+      <%- include('../partials/navigation') %>
         <section id="upper-img">
-          <%- include('../partials/navigation') %>
 
-            <% trails.forEach((trail)=> { %>
-              <%- include('../partials/trail-card', {trail: trail}) %>
-                <% }) %>
+          <% trails.forEach((trail)=> { %>
+            <%- include('../partials/trail-card', {trail: trail}) %>
+              <% }) %>
         </section>
 
 
