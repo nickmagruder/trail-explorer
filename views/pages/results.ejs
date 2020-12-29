@@ -14,22 +14,14 @@
 
   <body>
     <main>
-      <%- include('partials/header', {user: user}) %>
+      <%- include('partials/header') %>
+        <div id="user"><em>
+            <%= user %>
+          </em></div>
         <section id="upper-img">
           <%- include('partials/navigation') %>
         </section>
-        <div id="search-modal" class="modal">
 
-          <div id="content" class="search-modal-content">
-            <form action="/createprofile" method="POST">
-              <label>Search Location
-                <input type="text" name="location" placeholder="current location" />
-              </label><br>
-              <input type="submit" value="Search" class="modal-btn" />
-            </form>
-          </div>
-
-        </div>
         <div id="quote">
           <p><em>"After a day’s walk, everything has twice its usual value."</em> - G.M. Trevelyan</p>
         </div>
