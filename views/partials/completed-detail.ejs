@@ -1,0 +1,54 @@
+<!-- Detail modal -->
+
+<div id="detail-modal" class="modal favorite-detail-modal">
+
+  <div id="detail-content" class="detail-modal-content">
+    <img src="<%= savedTrails.img_url %>" alt="<%= savedTrails.trail %>">
+    <h2>
+      <%= savedTrails.trail %>
+    </h2>
+    <p><em>"<%= savedTrails.summary %>"</em></p>
+    <p>Located in <%= savedTrails.city %>, this <%= savedTrails.difficulty %>, <%= savedTrails.distance %> mile hike is
+            rated <%= savedTrails.rating %> out of 5 stars.</p>
+    <a href="<%= savedTrails.trail_url %>">
+      <em>Trail Website Here</em>
+    </a>
+    <form id="trail-save" action="/edit" method="POST">
+      <input type="hidden" name="username" value="<%=userInfo%>">
+      <input type="hidden" name="trail_id" value="<%=savedTrails.trailID%>" />
+      <input type="hidden" name="lat" value="<%=savedTrails.lat%>" />
+      <input type="hidden" name="lon" value="<%=savedTrails.lon%>" />
+      <input type="hidden" name="trail_name" value="<%=savedTrails.trail%>" />
+      <input type="hidden" name="city" value="<%=savedTrails.city%>" />
+      <input type="hidden" name="summary" value="<%=savedTrails.summary%>" />
+      <input type="hidden" name="distance" value="<%=savedTrails.distance%>" />
+      <input type="hidden" name="rating" value="<%=savedTrails.rating%>" />
+      <input type="hidden" name="elevation" value="<%=savedTrails.elevation%>" />
+      <input type="hidden" name="difficulty" value="<%=savedTrails.difficulty%>" />
+      <input type="hidden" name="trail_url" value="<%=savedTrails.trail_url%>" />
+      <input type="hidden" name="img_url" value="<%=savedTrails.img_url%>" />
+
+      <label>
+        Personal notes:
+        <input type="text" name="notes" text="<%=savedTrails.notes%>">
+      </label>
+      <input type="checkbox" id="completed" name="completed" value="completed">
+      <label for="completed">I have done this hike!</label><br>
+      <label>
+        Date Hiked:
+        <input type="date" name="date_completed">
+      </label>
+      <input type="submit" value="Save Changes" id="save-edit-btn" />
+    </form>
+
+    <form id="delete" action="/delete?_method=DELETE" method="POST">
+      <input type="hidden" name="id" value="<%=savedTrails.id%>">
+      <input type="hidden" name="username" value="<%=userInfo%>">
+      <input type="submit" value="Delete from Favorites">
+    </form>
+
+    <span class="close">&times;</span>
+
+  </div>
+
+</div>

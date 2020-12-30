@@ -153,11 +153,14 @@ function editSave(req, res) {
   const completed = req.body.completed;
   const dateCompleted = req.body.date_completed;
   const editProfileUsername = req.body.username;
+  const trailName = req.body.trail;
   client.query(`SELECT * FROM userID WHERE username = '${editProfileUsername}'`)
     .then(result => {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
-      const editSQL = `INSERT INTO favorite (notes, completed, date_completed) VALUES ($1, $2, $3) RETURNING * WHERE username = ${foreignIDname};`;
+      const editSQL = 
+      `UPDATE favorite (notes, completed, date_completed) VALUES ($1, $2, $3)
+      WHERE username = ${foreignIDname} AND trail = ${trailName}`
       client.query(editSQL, editArray);
       res.redirect(`/favorites/${editProfileUsername}`);
     });
