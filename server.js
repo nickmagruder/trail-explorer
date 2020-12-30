@@ -28,6 +28,7 @@ app.get('/search', getSearches);
 app.post('/search/save', saveTrail);
 app.get('/favorites/:username', generateFavoritesPage);
 app.get('/about_us/:username', getAboutUs);
+app.get('/profile/:username', getProfilePage);
 app.delete('/delete', deleteTrail);
 app.post('/edit', editSave);
 
@@ -162,6 +163,17 @@ function editSave(req, res) {
       res.redirect(`/favorites/${editProfileUsername}`);
     });
 }
+
+function getProfilePage(req, res) {
+  const userInfo = (req.params);
+  // const ProfileUsername = req.params.username;
+  // client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+  //   .then(result => {
+  //     const foreignIDname = result.rows[0].id;
+  res.render('pages/profile1.ejs', {userInfo: userInfo});
+}
+
+
 
 
 // Constructors
