@@ -1,4 +1,4 @@
-<div class="trail-card profile-trail-card">
+<div class="trail-card favorite-trail-card">
   <h3 class="trail-rating">
     <%= savedTrails.rating %> <i class="fas fa-star"></i>
   </h3>
@@ -20,6 +20,6 @@
     Elevation Gain: <%= savedTrails.elevation %>
   </h3>
 
-  <%- include('profile-detail', {savedTrails: savedTrails, userInfo: userInfo}) %>
+  <%- include('favorite-detail', {savedTrails: savedTrails, userInfo: userInfo}) %>
 
 </div>

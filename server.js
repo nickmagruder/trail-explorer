@@ -22,16 +22,14 @@ app.get('/', getIndexpage);
 app.post('/home', createProfile);
 app.post('/home/existing', getProfile);
 app.get('/home/:username', getHomepage);
-// app.post('/create_profile', createProfile);
-// app.post('/profile:id', getProfile);
-app.delete('/profile/delete', deleteTrail);
-app.put('/profile/update', updateTrail);
+// app.delete('/favorites/delete', deleteTrail);
+// app.put('/favorites/update', updateTrail);
 app.get('/search', getSearches);
 app.post('/search/save', saveTrail);
-app.get('/profile/:username', generateProfilePage);
+app.get('/favorites/:username', generateFavoritesPage);
 app.get('/about_us/:username', getAboutUs);
 app.delete('/delete', deleteTrail);
-app.post('/edit', editSave)
+app.post('/edit', editSave);
 
 
 function getIndexpage(req, res) {
@@ -96,10 +94,6 @@ function saveTrail(req, res) {
     });
 }
 
-function deleteTrail(req, res) {
-  //delete trail from favorites
-}
-
 function updateTrail(req, res) {
   //update trail information
 }
@@ -131,7 +125,7 @@ function getSearches(req, res) {
     });
 }
 
-function generateProfilePage(req, res) {
+function generateFavoritesPage(req, res) {
 
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
@@ -140,17 +134,16 @@ function generateProfilePage(req, res) {
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
         .then(result => {
           let savedTrails = result.rows;
-          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername });
+          res.render('pages/favorites.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername });
         });
     });
 }
 
 function deleteTrail(req, res) {
   const deleteRouteUsername = req.body.username;
-  console.log(req.body.username);
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
 
-    .then(() => res.redirect(`/profile/${deleteRouteUsername}`));
+    .then(() => res.redirect(`/favorites/${deleteRouteUsername}`));
 }
 
 // SQL update not working yet, we might need to add the API's "trail ID" # to the schema for accessing each trail for edits
@@ -164,9 +157,9 @@ function editSave(req, res) {
     .then(result => {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
-      const editSQL = `INSERT INTO favorite (notes, completed, date_completed) VALUES ($1, $2, $3) RETURNING * WHERE username = ${foreignIDname};`
+      const editSQL = `INSERT INTO favorite (notes, completed, date_completed) VALUES ($1, $2, $3) RETURNING * WHERE username = ${foreignIDname};`;
       client.query(editSQL, editArray);
-      res.redirect(`/profile/${editProfileUsername}`);
+      res.redirect(`/favorites/${editProfileUsername}`);
     });
 }
 
