@@ -125,8 +125,21 @@ div {
   width: 75%;
 }
 
+#user-exists{
+  margin: .5rem auto;
+}
+
+#user-not{
+  margin: .5rem auto;
+}
+
+
 .user-modal-content input {
   margin: .5rem auto;
+}
+
+#input-left{
+  margin-right:2rem;
 }
 
 .user-modal-content span {
