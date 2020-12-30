@@ -24,10 +24,14 @@
         <section id="upper-img">
           <%- include('../partials/navigation', {userInfo: userInfo.username}) %>
             <article class="dashboard">
-              <p><i class="fas fa-hiking"></i>(# trails hiked) Completed Hikes</p>
+              <p><i class="fas fa-hiking"></i>
+                <%= completedHikes %> Completed Hikes
+              </p>
             </article>
             <article class="dashboard">
-              <p><i class="fas fa-tachometer-alt"></i>(miles_hiked) Total Miles Hiked</p>
+              <p><i class="fas fa-tachometer-alt"></i>
+                <%= milesHiked %> Total Miles Hiked
+              </p>
             </article>
         </section>
 
@@ -54,7 +58,7 @@
             <h2><em>
                 <%= userInfo.username %>
               </em></h2>
-            <p>Based on your completed hikes, you have hiked a total of <%= userInfo.miles_hiked %> so far</p>
+            <p>Based on your completed hikes, you have hiked a total of <%= milesHiked %> so far</p>
             <p>Your average hike distance is (calculated-average) miles</p>
             <p><em>Keep going!</em></p>
             <br />
