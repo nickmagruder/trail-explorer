@@ -13,3 +13,4 @@ function hideNewUser(){
 $(':radio').change(hideNewUser);
 
 
+// $('form').find('input[name="username"]').val()

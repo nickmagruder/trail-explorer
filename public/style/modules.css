@@ -184,3 +184,8 @@ a:visited {
   margin-top: 1.5rem;
   display: block;
 }
+
+.spacer{
+  visibility: hidden;
+  width: 100%;
+}
