@@ -170,8 +170,7 @@ function editSave(req, res) {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
       const editSQL = 
-      `UPDATE favorite (notes, completed, date_completed) VALUES ($1, $2, $3)
-      WHERE username = ${foreignIDname} AND trail = ${trailName}`
+      `UPDATE favorite (notes, completed, date_completed) VALUES ($1, $2, $3) WHERE username = ${foreignIDname} AND trail = ${trailName}`;
       client.query(editSQL, editArray);
       res.redirect(`/favorites/${editProfileUsername}`);
     });
