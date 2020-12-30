@@ -159,20 +159,19 @@ function deleteTrail(req, res) {
 
 // SQL update not working yet, we might need to add the API's "trail ID" # to the schema for accessing each trail for edits
 function editSave(req, res) {
-  console.log(req.body);
   const notesEdit = req.body.notes;
   const completed = req.body.completed;
   const dateCompleted = req.body.date_completed;
   const editProfileUsername = req.body.username;
-  const trailName = req.body.trail;
+  const trailName = req.body.trail_name;
   client.query(`SELECT * FROM userID WHERE username = '${editProfileUsername}'`)
     .then(result => {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
-      const editSQL = 
-      `UPDATE favorite (notes, completed, date_completed) VALUES ($1, $2, $3)
-      WHERE username = ${foreignIDname} AND trail = ${trailName}`
-      client.query(editSQL, editArray);
+      const editSQL = `UPDATE favorite SET notes='${editArray[0]}', completed='${editArray[1]}', date_completed='${editArray[2]}' WHERE username='${foreignIDname}' AND trail='${trailName}'`;
+      client.query(editSQL); 
+/* client.query(`SELECT * FROM favorite WHERE username='${foreignIDname}' AND trail='${trailName}'`)
+      .then(result => console.log(result)); */
       res.redirect(`/favorites/${editProfileUsername}`);
     });
 }
