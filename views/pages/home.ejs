@@ -45,15 +45,19 @@
           <p><em>"After a day’s walk, everything has twice its usual value."</em> - G.M. Trevelyan</p>
         </div>
         <div id="search" class="nav-square search"><i class="fas fa-search-location center-icon"></i>
+          <p class="icon-desc">Search</p>
         </div>
         <div id="profile" class="nav-square">
           <a href="/profile/<%= userInfo.username %>"><i class="far fa-address-card center-icon"></i></a>
+          <p class="icon-desc">Profile</p>
         </div>
         <div id="favorites" class="nav-square">
           <a href="/favorites/<%= userInfo.username %>"><i class="fas fa-clipboard-list center-icon"></i></a>
+          <p class="icon-desc">Favorites</p>
         </div>
         <div id="about" class="nav-square">
           <a href="/about_us/<%= userInfo.username %>"><i class="fas fa-users center-icon"></i></a>
+          <p class="icon-desc">About Us</p>
         </div>
         <%- include('../partials/footer') %>
     </main>
