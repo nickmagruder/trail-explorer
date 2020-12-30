@@ -4,12 +4,16 @@ const $navBtn = $('#menu-btn');
 const $navMenu = $('#menu');
 const $searchBtn = $('.search');
 const $searchModal = $('#search-modal');
+const $location = $('#search-form').find('input[name=location]');
 
 $navBtn.click(function() {
   $navMenu.toggle();
 });
 
 $searchBtn.click(() => {
+  if($location.val() === ','){
+    $location.val('');
+  }
   $searchModal.show();
 });
 
