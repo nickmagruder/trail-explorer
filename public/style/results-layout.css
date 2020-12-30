@@ -96,6 +96,15 @@ div {
   align-items: center;
 }
 
+.about-us {
+  grid-area: e;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
 .modal-btn {
   margin-top: 1.5rem;
 }
@@ -174,4 +183,41 @@ div {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.dev-info {
+  width: 90%;
+  height: 24vh;
+  background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
+  color: white;
+  border:1px solid white;
+  border-radius: .75rem;
+  box-shadow: 3px 3px 6px black;
+  margin: 1vh auto;
+  padding: 1.25rem;
+}
+
+.dev-img-l {
+  float: left;
+  margin-right: 2rem;
+  height: 100%;
+  width: 48%;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+.dev-img-r {
+  float: right;
+  margin-left: 2rem;
+  height: 100%;
+  width: 48%;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+.dev-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: .5rem;
 }
