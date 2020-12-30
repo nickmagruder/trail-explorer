@@ -18,9 +18,11 @@
     </header>
     <main>
       <div id="user"><em>
-          How about one of these trails, <%= userInfo %>?
+          How about one of these trails, <span class="user-title">
+            <%= userInfo %>
+          </span>?
         </em></div>
-        
+
       <%- include('../partials/navigation', {userInfo: userInfo}) %>
         <section id="upper-img" class="result-cards">
 

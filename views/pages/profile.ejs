@@ -21,10 +21,12 @@
         <%= userInfo %>
       </em></div>
     <%- include('../partials/navigation', {userInfo: userInfo}) %>
-      <section id="upper-img">
+      <section id="upper-img" class="search-results>
 
         <% savedTrails.forEach((savedTrails)=> { %>
           <%- include('../partials/profile-trail-card', {savedTrails: savedTrails}) %>
+
+
             <% }) %>
               <div class="trail-card spacer"></div>
       </section>

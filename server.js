@@ -29,7 +29,9 @@ app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.post('/search/save', saveTrail);
 app.get('/profile/:username', generateProfilePage);
-app.get('/aboutus', generateAboutUs);
+app.get('/about_us/:username', getAboutUs);
+app.delete('/delete', deleteTrail);
+
 
 function generateAboutUs(){
 //TODO aboutus page
@@ -45,6 +47,10 @@ function getHomepage(req, res) {
   res.render('pages/home.ejs', { userInfo: req.params });
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
+}
+
+function getAboutUs(req, res) {
+  res.render('pages/about_us.ejs', { userInfo: req.params});
 }
 
 function createProfile(req, res) {
@@ -142,7 +148,10 @@ function generateProfilePage(req, res) {
     });
 }
 
-
+function deleteTrail(req, res) {
+  return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
+  .then(() => res.redirect('/profile'));
+}
 
 // Constructors
 

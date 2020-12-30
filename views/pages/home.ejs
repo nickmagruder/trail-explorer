@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="../style/modules.css">
     <script src="https://kit.fontawesome.com/4fc1b5d5ea.js" crossorigin="anonymous"></script>
     <title>Trail Explorer</title>
-    <base href = 'app.js'>
+    <base href='app.js'>
   </head>
 
   <body>
     <main>
       <%- include('../partials/header') %>
         <div id="user"><em>
-            Are you ready to explore <%= userInfo.username %>?
+            Are you ready to explore <span class="user-title">
+              <%= userInfo.username %>
+            </span>?
           </em></div>
         <section id="upper-img">
           <%- include('../partials/navigation', {userInfo: userInfo.username}) %>
@@ -51,7 +53,7 @@
           <a href="#"><i class="fas fa-route center-icon"></i></a>
         </div>
         <div id="about" class="nav-square">
-          <a href="#"><i class="fas fa-users center-icon"></i></a>
+          <a href="/about_us/<%= userInfo.username %>"><i class="fas fa-users center-icon"></i></a>
         </div>
         <%- include('../partials/footer') %>
     </main>

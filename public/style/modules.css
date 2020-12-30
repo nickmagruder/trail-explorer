@@ -188,4 +188,7 @@ a:visited {
 .spacer{
   visibility: hidden;
   width: 100%;
+
+.user-title {
+  text-transform: capitalize;
 }
