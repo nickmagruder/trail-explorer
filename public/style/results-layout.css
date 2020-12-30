@@ -190,7 +190,7 @@ div {
   height: 24vh;
   background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
   color: white;
-  border:1px double white;
+  border:1px solid white;
   border-radius: .75rem;
   box-shadow: 3px 3px 6px black;
   margin: 1vh auto;
@@ -201,6 +201,8 @@ div {
   float: left;
   margin-right: 2rem;
   height: 100%;
+  width: 48%;
+  object-fit: cover;
   border-radius: 10%;
 }
 
@@ -208,6 +210,8 @@ div {
   float: right;
   margin-left: 2rem;
   height: 100%;
+  width: 48%;
+  object-fit: cover;
   border-radius: 10%;
 }
 
