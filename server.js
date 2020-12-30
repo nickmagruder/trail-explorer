@@ -28,8 +28,12 @@ app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
-app.get('/profile', generateProfilePage)
+
+app.get('/profile', generateProfilePage);
+app.get('/about_us/:username', getAboutUs);
+
 app.delete('/delete', deleteTrail);
+
 
 
 function getIndexpage(req, res) {
@@ -42,6 +46,10 @@ function getHomepage(req, res) {
   res.render('pages/home.ejs', { userInfo: req.params});
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
+}
+
+function getAboutUs(req, res) {
+  res.render('pages/about_us.ejs', { userInfo: req.params});
 }
 
 function createProfile(req, res) {
@@ -129,11 +137,11 @@ function generateProfilePage(req, res) {
     .then(result => {
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
-    .then(result => {
-      let savedTrails = result.rows;
-      res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: foreignIDname });
-    })
-  })
+        .then(result => {
+          let savedTrails = result.rows;
+          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: foreignIDname });
+        });
+    });
 }
 
 function deleteTrail(req, res) {

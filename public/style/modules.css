@@ -184,3 +184,7 @@ a:visited {
   margin-top: 1.5rem;
   display: block;
 }
+
+.user-title {
+  text-transform: capitalize;
+}
