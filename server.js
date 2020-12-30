@@ -32,8 +32,9 @@ app.delete('/delete', deleteTrail);
 app.post('/edit', editSave);
 
 
+
 function getIndexpage(req, res) {
-  res.render('index.ejs', {userExists: 'start'});
+  res.render('index.ejs', { userExists: 'start' });
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
@@ -60,7 +61,7 @@ function createProfile(req, res) {
         client.query(sql, sqlArray);
         res.render('pages/home.ejs', { userInfo: user });
       } else {
-        res.render('index.ejs', {userExists: 'true'});
+        res.render('index.ejs', { userExists: 'true' });
       }
     });
 }
@@ -70,7 +71,7 @@ function getProfile(req, res) {
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
     .then(results => {
       if (!results.rows[0]) {
-        res.render('index.ejs', {userExists: 'false'});
+        res.render('index.ejs', { userExists: 'false' });
       } else {
         const userInfo = results.rows[0];
         res.render('pages/home.ejs', { userInfo: userInfo });
@@ -87,10 +88,20 @@ function saveTrail(req, res) {
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
       const foreignIDname = result.rows[0].id;
-      const sqlArray = [foreignIDname, trail.lat, trail.lon, trail.trail_name, trail.city, trail.summary, trail.difficulty, trail.rating, trail.elevation || 0, trail.distance, trail.img_url, trail.trail_url];
-      const sql = 'INSERT INTO favorite (username, lat, lon, trail, city, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *';
-      client.query(sql, sqlArray);
-      res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND trail = '${trail.trail_name}'`)
+        .then(result => {
+          console.log(result.rowCount);
+          if(result.rowCount === 0){
+            console.log('new');
+            const sqlArray = [foreignIDname, trail.lat, trail.lon, trail.trail_name, trail.city, trail.summary, trail.difficulty, trail.rating, trail.elevation || 0, trail.distance, trail.img_url, trail.trail_url];
+            const sql = 'INSERT INTO favorite (username, lat, lon, trail, city, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *';
+            client.query(sql, sqlArray);
+            res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
+          }else{
+            console.log('exists');
+            res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
+          }
+        });
     });
 }
 
@@ -142,7 +153,6 @@ function generateFavoritesPage(req, res) {
 function deleteTrail(req, res) {
   const deleteRouteUsername = req.body.username;
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
-
     .then(() => res.redirect(`/favorites/${deleteRouteUsername}`));
 }
 

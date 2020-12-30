@@ -42,3 +42,5 @@ Give credit (and a link) to other people or resources that helped you build this
 <!-- TODO -->
 <!-- error message for sign ins -->
 <!-- Username placement on modal and also changing margins based on new/returning user -->
+<!-- Fix glitch in modal sign in -->
+<!-- SQL update back end for completed  -->
