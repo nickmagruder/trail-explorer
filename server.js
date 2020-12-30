@@ -34,10 +34,6 @@ app.delete('/delete', deleteTrail);
 app.post('/edit', editSave)
 
 
-function generateAboutUs() {
-  //TODO aboutus page
-}
-
 function getIndexpage(req, res) {
   res.render('index.ejs', {userExists: 'start'});
   //modal box for sign in or create new profile
@@ -153,6 +149,7 @@ function deleteTrail(req, res) {
   const deleteRouteUsername = req.body.username;
   console.log(req.body.username);
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
+
     .then(() => res.redirect(`/profile/${deleteRouteUsername}`));
 }
 
@@ -172,6 +169,7 @@ function editSave(req, res) {
       res.redirect(`/profile/${editProfileUsername}`);
     });
 }
+
 
 // Constructors
 

@@ -4,7 +4,12 @@ const $navBtn = $('#menu-btn');
 const $navMenu = $('#menu');
 const $searchBtn = $('.search');
 const $searchModal = $('#search-modal');
+
+const $mileageBtn = $('#mileage');
+const $mileageModal = $('#mileage-modal');
+
 const $location = $('#search-form').find('input[name=location]');
+
 
 $navBtn.click(function() {
   $navMenu.toggle();
@@ -15,6 +20,10 @@ $searchBtn.click(() => {
     $location.val('');
   }
   $searchModal.show();
+});
+
+$mileageBtn.click(() => {
+  $mileageModal.show();
 });
 
 $('.result-cards').on('click', '.trail-card', e => {
