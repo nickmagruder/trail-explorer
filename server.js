@@ -28,8 +28,12 @@ app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
 app.get('/search/save', saveTrail);
+
 app.get('/profile', generateProfilePage);
 app.get('/about_us/:username', getAboutUs);
+
+app.delete('/delete', deleteTrail);
+
 
 
 function getIndexpage(req, res) {
@@ -140,7 +144,10 @@ function generateProfilePage(req, res) {
     });
 }
 
-
+function deleteTrail(req, res) {
+  return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
+  .then(() => res.redirect('/profile'));
+}
 
 // Constructors
 
