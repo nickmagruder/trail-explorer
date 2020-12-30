@@ -94,6 +94,9 @@ div {
 }
 
 #menu {
+  position: fixed;
+  left: 60%;
+  top: 12%;
   display: none;
   float:right;
   width: 40%;
