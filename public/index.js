@@ -26,6 +26,7 @@ function userError(){
     $('#user-not').show();
     $('input[value=existing]').attr('checked', 'checked');
     $('.new').hide();
+    $('form').attr('action', '/home/existing');
   }
 }
 
