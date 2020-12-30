@@ -42,3 +42,4 @@ Give credit (and a link) to other people or resources that helped you build this
 TODO
 <!-- exit button on search modal
 radio button functionality on profile on index page + different function to query for existing profile -->
+<!-- error message for sign ins -->

@@ -15,7 +15,6 @@ $searchBtn.click(() => {
 
 $('.result-cards').on('click', '.trail-card', e => {
   let $selectedCard = $(e.target).closest('div');
-  console.log($selectedCard);
   let $cardModal = $selectedCard.find('.modal');
   $cardModal.show();
 });

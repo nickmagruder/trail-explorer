@@ -185,6 +185,10 @@ a:visited {
   display: block;
 }
 
+.spacer{
+  visibility: hidden;
+  width: 100%;
+
 .user-title {
   text-transform: capitalize;
 }

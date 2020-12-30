@@ -23,18 +23,19 @@ app.post('/home', createProfile);
 app.post('/home/existing', getProfile);
 app.get('/home/:username', getHomepage);
 // app.post('/create_profile', createProfile);
-app.post('/profile:id', getProfile);
+// app.post('/profile:id', getProfile);
 app.delete('/profile/delete', deleteTrail);
 app.put('/profile/update', updateTrail);
 app.get('/search', getSearches);
-app.get('/search/save', saveTrail);
-
-app.get('/profile', generateProfilePage);
+app.post('/search/save', saveTrail);
+app.get('/profile/:username', generateProfilePage);
 app.get('/about_us/:username', getAboutUs);
-
 app.delete('/delete', deleteTrail);
 
 
+function generateAboutUs(){
+//TODO aboutus page
+}
 
 function getIndexpage(req, res) {
   res.render('index.ejs');
@@ -43,7 +44,7 @@ function getIndexpage(req, res) {
 }
 
 function getHomepage(req, res) {
-  res.render('pages/home.ejs', { userInfo: req.params});
+  res.render('pages/home.ejs', { userInfo: req.params });
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
@@ -57,7 +58,7 @@ function createProfile(req, res) {
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
     .then(results => {
 
-      if(!results.rows[0]){
+      if (!results.rows[0]) {
         const sqlArray = [user.username, user.city, user.us_state, 0];
 
         const sql = 'INSERT INTO userID (username, city, us_state, miles_hiked) VALUES ($1, $2, $3, $4) RETURNING *';
@@ -71,14 +72,13 @@ function createProfile(req, res) {
 
 function getProfile(req, res) {
   const user = req.body;
-  console.log(user);
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
     .then(results => {
-      if(!results.rows[0]){
+      if (!results.rows[0]) {
         res.redirect('/');
-      } else{
+      } else {
         const userInfo = results.rows[0];
-        res.render('pages/home.ejs', {userInfo: userInfo});
+        res.render('pages/home.ejs', { userInfo: userInfo });
       }
     });
 }
@@ -86,14 +86,17 @@ function getProfile(req, res) {
 function saveTrail(req, res) {
   //save trail to sql database for user profile
   //repopulate search page
-  const username = 1;
-  // const trail = req.body;
-  const trail = require('./data/trails.json');
-
-  const sqlArray = [username, trail[0].latitude, trail[0].longitude, trail[0].name, trail[0].summary, trail[0].difficulty, trail[0].stars, trail[0].ascent, trail[0].length, trail[0].imgMedium, trail[0].url];
-  const sql = 'INSERT INTO favorite (username, lat, lon, trail, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
-  client.query(sql, sqlArray);
-  res.redirect('/search');
+  const trail = req.body;
+  const location = req.body.location;
+  const ProfileUsername = trail.username;
+  client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+    .then(result => {
+      const foreignIDname = result.rows[0].id;
+      const sqlArray = [foreignIDname, trail.lat, trail.lon, trail.trail_name, trail.city, trail.summary, trail.difficulty, trail.rating, trail.elevation || 0, trail.distance, trail.img_url, trail.trail_url];
+      const sql = 'INSERT INTO favorite (username, lat, lon, trail, city, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *';
+      client.query(sql, sqlArray);
+      res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
+    });
 }
 
 function deleteTrail(req, res) {
@@ -123,7 +126,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser });
+      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser, location: query});
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
@@ -132,14 +135,15 @@ function getSearches(req, res) {
 }
 
 function generateProfilePage(req, res) {
-  const ProfileUsername = 'iamnotatgregs';
+
+  const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
         .then(result => {
           let savedTrails = result.rows;
-          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: foreignIDname });
+          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername});
         });
     });
 }
