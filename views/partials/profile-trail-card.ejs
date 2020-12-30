@@ -19,4 +19,7 @@
   <h3 class="trail-length">
     Elevation Gain: <%= savedTrails.elevation %>
   </h3>
+
+  <%- include('profile-detail', {savedTrails: savedTrails, userInfo: userInfo}) %>
+
 </div>

@@ -22,3 +22,9 @@ $('.result-cards').on('click', '.trail-card', e => {
 $('.close').on('click', e=>{
   $('.modal').hide();
 });
+
+$('.search-results').on('click', '.trail-card', e => {
+  let $selectedCard = $(e.target).closest('div');
+  let $cardModal = $selectedCard.find('.modal');
+  $cardModal.show();
+});
