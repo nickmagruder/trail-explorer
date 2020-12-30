@@ -48,7 +48,7 @@
             <h2><em class="user-title">
                 <%= userInfo %>
               </em></h2>
-            <p>Based on your completed hikes, you have hiked a total of <%= mileage %> so far</p>
+            <p>Based on your completed hikes, you have hiked a total of (total-miles) so far</p>
             <p>Your average hike distance is (calculated-average) miles</p>
             <p><em>Keep going!</em></p>
             <br />
@@ -66,7 +66,7 @@
           <a href="#"><i class="fas fa-tachometer-alt center-icon"></i></a>
         </div>
         <div id="favorites" class="nav-square">
-          <a href="#"><i class="fas fa-clipboard-list center-icon"></i></a>
+          <a href="/favorites/<%= userInfo %>"><i class="fas fa-clipboard-list center-icon"></i></a>
         </div>
         <div id="completed" class="nav-square">
           <a href="#"><i class="fas fa-check center-icon"></i></a>
