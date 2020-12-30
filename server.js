@@ -31,10 +31,11 @@ app.post('/search/save', saveTrail);
 app.get('/profile/:username', generateProfilePage);
 app.get('/about_us/:username', getAboutUs);
 app.delete('/delete', deleteTrail);
+app.post('/edit', editSave)
 
 
-function generateAboutUs(){
-//TODO aboutus page
+function generateAboutUs() {
+  //TODO aboutus page
 }
 
 function getIndexpage(req, res) {
@@ -50,7 +51,7 @@ function getHomepage(req, res) {
 }
 
 function getAboutUs(req, res) {
-  res.render('pages/about_us.ejs', { userInfo: req.params});
+  res.render('pages/about_us.ejs', { userInfo: req.params });
 }
 
 function createProfile(req, res) {
@@ -126,7 +127,7 @@ function getSearches(req, res) {
       let TrailData = trailsArray.map(trail => {
         return new TrailConstructor(trail);
       });
-      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser, location: query});
+      res.render('pages/results.ejs', { trails: TrailData, userInfo: queryUser, location: query });
     })
     .catch(error => {
       res.status(500).send('Sorry, an error has occured');
@@ -143,14 +144,33 @@ function generateProfilePage(req, res) {
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
         .then(result => {
           let savedTrails = result.rows;
-          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername});
+          res.render('pages/profile.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername });
         });
     });
 }
 
 function deleteTrail(req, res) {
+  const deleteRouteUsername = req.body.username;
+  console.log(req.body.username);
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
-  .then(() => res.redirect('/profile'));
+    .then(() => res.redirect(`/profile/${deleteRouteUsername}`));
+}
+
+// SQL update not working yet, we might need to add the API's "trail ID" # to the schema for accessing each trail for edits
+function editSave(req, res) {
+  console.log(req.body);
+  const notesEdit = req.body.notes;
+  const completed = req.body.completed;
+  const dateCompleted = req.body.date_completed;
+  const editProfileUsername = req.body.username;
+  client.query(`SELECT * FROM userID WHERE username = '${editProfileUsername}'`)
+    .then(result => {
+      const foreignIDname = result.rows[0].id;
+      const editArray = [notesEdit, completed, dateCompleted];
+      const editSQL = `INSERT INTO favorite (notes, completed, date_completed) VALUES ($1, $2, $3) RETURNING * WHERE username = ${foreignIDname};`
+      client.query(editSQL, editArray);
+      res.redirect(`/profile/${editProfileUsername}`);
+    });
 }
 
 // Constructors
