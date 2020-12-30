@@ -25,16 +25,19 @@
 
           <div id="user-content" class="user-modal-content">
             <form action="/home" method="POST">
+              <span id="user-not">Username Does Not Exist</span><br>
+              <span id="user-exists">Username Already Exists</span><br>
               <label>Username</label>
-              <input type="text" name="username" placeholder="username"/><br>
+              <input id="input-left" type="text" name="username" placeholder="username"/><br>
               <label class = "new">City</label>
               <input class = "new" type="text" name="city" placeholder="city" /><br />
               <lable class = "new">State</lable>
               <input class = "new" type="text" name="us_state" placeholder="state" />
               <br>
-              <input type="radio" name="user-type" value="new" />New Hiker
+              <input type="radio" name="user-type" value="new" checked/>New Hiker
               <span><em>OR</em></span>
               <input type="radio" name="user-type" value="existing" />Existing Hiker<br />
+              <input type="hidden" name="user-status" value="<%=userExists%>">
               <input type="submit" value="Get Started" class="modal-btn" />
             </form>
           </div>

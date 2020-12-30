@@ -38,7 +38,7 @@ function generateAboutUs(){
 }
 
 function getIndexpage(req, res) {
-  res.render('index.ejs');
+  res.render('index.ejs', {userExists: 'start'});
   //modal box for sign in or create new profile
   //render new homepage with customized name and options
 }
@@ -65,7 +65,7 @@ function createProfile(req, res) {
         client.query(sql, sqlArray);
         res.render('pages/home.ejs', { userInfo: user });
       } else {
-        res.redirect('/');
+        res.render('index.ejs', {userExists: 'true'});
       }
     });
 }
@@ -75,7 +75,7 @@ function getProfile(req, res) {
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
     .then(results => {
       if (!results.rows[0]) {
-        res.redirect('/');
+        res.render('index.ejs', {userExists: 'false'});
       } else {
         const userInfo = results.rows[0];
         res.render('pages/home.ejs', { userInfo: userInfo });

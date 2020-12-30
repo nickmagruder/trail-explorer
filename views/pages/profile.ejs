@@ -21,7 +21,7 @@
         <%= userInfo %>
       </em></div>
     <%- include('../partials/navigation', {userInfo: userInfo}) %>
-      <section id="upper-img" class="search-results>
+      <section id="upper-img" class="search-results">
 
         <% savedTrails.forEach((savedTrails)=> { %>
           <%- include('../partials/profile-trail-card', {savedTrails: savedTrails}) %>
@@ -36,11 +36,11 @@
 
       <div id="search-modal" class="modal">
         <div id="search-content" class="search-modal-content">
-          <form action="/search" method="GET">
+          <form id ="search-form" action="/search" method="GET">
             <label>Search Location
               <input type="text" name="location" />
             </label><br>
-            <input type="hidden" name="userInfo" value="<%= userInfo.username %>">
+            <input type="hidden" name="userInfo" value="<%= userInfo%>">
             <input type="submit" value="Search Now" class="modal-btn" />
           </form>
         </div>
