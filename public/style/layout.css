@@ -227,6 +227,10 @@ div {
 .mileage-modal-content {
   margin: 40% auto;
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .mileage-modal-content input {

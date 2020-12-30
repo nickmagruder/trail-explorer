@@ -29,6 +29,7 @@ app.post('/search/save', saveTrail);
 app.get('/favorites/:username', generateFavoritesPage);
 app.get('/about_us/:username', getAboutUs);
 app.get('/profile/:username', getProfilePage);
+app.get('/completed/:username', getCompletedPage);
 app.delete('/delete', deleteTrail);
 app.post('/edit', editSave);
 
@@ -169,23 +170,32 @@ function editSave(req, res) {
     .then(result => {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
-      const editSQL = 
+      const editSQL =
       `UPDATE favorite (notes, completed, date_completed) VALUES ($1, $2, $3)
-      WHERE username = ${foreignIDname} AND trail = ${trailName}`
+      WHERE username = ${foreignIDname} AND trail = ${trailName}`;
       client.query(editSQL, editArray);
       res.redirect(`/favorites/${editProfileUsername}`);
     });
 }
 
 function getProfilePage(req, res) {
-  const userInfo = (req.params);
-  // const ProfileUsername = req.params.username;
-  // client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
-  //   .then(result => {
-  //     const foreignIDname = result.rows[0].id;
-  res.render('pages/profile1.ejs', {userInfo: userInfo});
+  const ProfileUsername = req.params.username;
+  client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+    .then(result => {
+      const userInfo = (result.rows[0]);
+      console.log(userInfo);
+      const foreignIDname = result.rows[0].id;
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
+        .then(result => {
+          let savedTrails = result.rows;
+          res.render('pages/profile1.ejs', { savedTrails: savedTrails, userInfo: req.params });
+        });
+    });
 }
 
+function getCompletedPage(req, res){
+  res.render('pages/completed.ejs');
+}
 
 
 
