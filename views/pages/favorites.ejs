@@ -17,9 +17,9 @@
     <main>
       <%- include('../partials/header') %>
         <div id="user"><em>
-            Are you ready to explore <span class="user-title">
-              <%= userInfo.username %>
-            </span>?
+            <span class="user-title">
+              <%= userInfo %>
+            </span>
           </em></div>
         <section id="upper-img">
           <%- include('../partials/navigation', {userInfo: userInfo.username}) %>
@@ -41,19 +41,35 @@
 
         </div>
 
+        <!-- Mileage modal -->
+
+        <div id="mileage-modal" class="modal">
+          <div id="mileage-content" class="mileage-modal-content">
+            <h2><em class="user-title">
+                <%= userInfo %>
+              </em></h2>
+            <p>Based on your completed hikes, you have hiked a total of <%= mileage %> so far</p>
+            <p>Your average hike distance is (calculated-average) miles</p>
+            <p><em>Keep going!</em></p>
+            <br />
+            <span class="close">&times;</span>
+          </div>
+
+        </div>
+
         <div id="quote">
           <p><em>"After a day’s walk, everything has twice its usual value."</em> - G.M. Trevelyan</p>
         </div>
         <div id="search" class="nav-square search"><i class="fas fa-search-location center-icon"></i>
         </div>
-        <div id="profile" class="nav-square">
-          <a href="/profile/<%= userInfo.username %>"><i class="far fa-address-card center-icon"></i></a>
+        <div id="mileage" class="nav-square">
+          <a href="#"><i class="fas fa-tachometer-alt center-icon"></i></a>
         </div>
         <div id="favorites" class="nav-square">
-          <a href="/favorites/<%= userInfo.username %>"><i class="fas fa-clipboard-list center-icon"></i></a>
+          <a href="#"><i class="fas fa-clipboard-list center-icon"></i></a>
         </div>
-        <div id="about" class="nav-square">
-          <a href="/about_us/<%= userInfo.username %>"><i class="fas fa-users center-icon"></i></a>
+        <div id="completed" class="nav-square">
+          <a href="#"><i class="fas fa-check center-icon"></i></a>
         </div>
         <%- include('../partials/footer') %>
     </main>

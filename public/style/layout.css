@@ -68,6 +68,10 @@ div {
 
 }
 
+#mileage {
+  grid-area: h;
+}
+
 #favorites {
   grid-area: i;
 
@@ -76,6 +80,10 @@ div {
 #about {
   grid-area: j;
 
+}
+
+#completed {
+  grid-area: j;
 }
 
 #foot {
@@ -190,4 +198,28 @@ div {
   float: right;
   font-size: 2rem;
   font-weight: bold;
+}
+
+#mileage-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.mileage-modal-content {
+  margin: 40% auto;
+  width: 75%;
+}
+
+.mileage-modal-content input {
+  margin: .5rem auto;
+}
+
+.mileage-modal-content span {
+  margin: auto .7rem;
 }

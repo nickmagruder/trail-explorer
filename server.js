@@ -33,10 +33,6 @@ app.get('/about_us/:username', getAboutUs);
 app.delete('/delete', deleteTrail);
 
 
-function generateAboutUs(){
-//TODO aboutus page
-}
-
 function getIndexpage(req, res) {
   res.render('index.ejs');
   //modal box for sign in or create new profile
@@ -150,8 +146,9 @@ function generateProfilePage(req, res) {
 
 function deleteTrail(req, res) {
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
-  .then(() => res.redirect('/profile'));
+    .then(() => res.redirect('/profile'));
 }
+
 
 // Constructors
 

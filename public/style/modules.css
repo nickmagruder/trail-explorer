@@ -33,6 +33,10 @@ a:visited {
 #user {
   font-size:1.5rem;
   text-shadow: 0px 0px 4px black;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  padding-bottom: .2rem;
 }
 
 #quote {
@@ -189,6 +193,41 @@ a:visited {
   visibility: hidden;
   width: 100%;
 
+}
+
 .user-title {
   text-transform: capitalize;
+}
+
+.mileage-modal-content {
+	background-color:#0a3602;
+	padding: 1.5rem .75rem;
+	border: 1px solid white;
+	border-radius: .75rem;
+	color: white;
+	text-align: center;
+}
+
+.mileage-modal-content h2, p, a {
+  margin: .5rem auto;
+}
+
+.mileage-modal-content h2 {
+  font-size: 1.5rem;
+}
+
+.mileage-modal-content em {
+  font-style: italic;
+}
+
+.mileage-modal-content button {
+  margin: 2.5rem;
+}
+
+.mileage-modal-content a {
+  color: rgb(227, 250, 23);
+}
+
+.mileage-modal-content span {
+  margin: auto .7rem;
 }

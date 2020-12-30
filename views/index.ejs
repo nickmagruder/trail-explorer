@@ -16,7 +16,7 @@
     <main>
       <%- include('partials/header') %>
         <section id="upper-img">
-          <%- include('partials/navigation', {userInfo: "Bob"}) %>
+          <%- include('partials/navigation', {userInfo: "Bob" }) %>
         </section>
 
         <!-- User name input modal -->
@@ -26,11 +26,11 @@
           <div id="user-content" class="user-modal-content">
             <form action="/home" method="POST">
               <label>Username</label>
-              <input type="text" name="username" placeholder="username"/><br>
-              <label class = "new">City</label>
-              <input class = "new" type="text" name="city" placeholder="city" /><br />
-              <lable class = "new">State</lable>
-              <input class = "new" type="text" name="us_state" placeholder="state" />
+              <input type="text" name="username" placeholder="username" /><br>
+              <label class="new">City</label>
+              <input class="new" type="text" name="city" placeholder="city" /><br />
+              <lable class="new">State</lable>
+              <input class="new" type="text" name="us_state" placeholder="state" />
               <br>
               <input type="radio" name="user-type" value="new" />New Hiker
               <span><em>OR</em></span>
@@ -50,7 +50,7 @@
           <a href="#"><i class="far fa-address-card center-icon"></i></a>
         </div>
         <div id="favorites" class="nav-square">
-          <a href="#"><i class="fas fa-route center-icon"></i></a>
+          <a href="#"><i class="fas fa-clipboard-list center-icon"></i></a>
         </div>
         <div id="about" class="nav-square">
           <a href="#"><i class="fas fa-users center-icon"></i></a>
