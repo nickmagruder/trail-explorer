@@ -24,6 +24,7 @@ a:visited {
 
 .center-icon {
   font-size: 4rem;
+  margin-bottom: 0;
 }
 
 #heading {
@@ -78,6 +79,11 @@ a:visited {
 
 .nav-square {
   background-color: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+}
+
+.icon-desc {
+  margin-top: 0;
 }
 
 .modal {
@@ -103,7 +109,7 @@ a:visited {
 }
 
 .search-modal-content {
-	background-color:#0a36029f;
+	background-color:#0a3602e5;
 	padding: 24px 12px;
 	border: 1px solid white;
 	border-radius: 12px;
@@ -212,6 +218,10 @@ a:visited {
   margin: .5rem auto;
 }
 
+.mileage-modal-content p {
+  display: block;
+}
+
 .mileage-modal-content h2 {
   font-size: 1.5rem;
 }
@@ -230,4 +240,19 @@ a:visited {
 
 .mileage-modal-content span {
   margin: auto .7rem;
+}
+
+.dashboard i {
+  padding: 1rem;
+  margin: 1.2rem;
+  font-size: 6rem;
+  color: white;
+  text-shadow:0px 0px 10px black;
+}
+
+.dashboard p {
+  color: white;
+  font-size: 1.5rem;
+  text-shadow:0px 0px 10px black;
+
 }
