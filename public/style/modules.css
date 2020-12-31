@@ -38,6 +38,7 @@ a:visited {
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
   padding-bottom: .2rem;
+
 }
 
 #quote {
@@ -108,17 +109,13 @@ a:visited {
 	text-align: center;
 }
 
-.search-modal-content {
-	background-color:#0a3602e5;
+.search-modal-content, .detail-modal-content, .mileage-modal-content {
+	background-color:#0a3602;
 	padding: 24px 12px;
 	border: 1px solid white;
 	border-radius: 12px;
 	color: white;
 	text-align: center;
-}
-
-.trail-rating {
-
 }
 
 .trail-rating i {
@@ -139,24 +136,11 @@ a:visited {
   font-style: oblique;
 }
 
-.trail-distance {
-
-}
-
 .close:hover,
 .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.detail-modal-content {
-	background-color:#0a3602;
-	padding: 1.5rem .75rem;
-	border: 1px solid white;
-	border-radius: .75rem;
-	color: white;
-	text-align: center;
 }
 
 .detail-modal-content h2, p, a {
@@ -193,25 +177,11 @@ a:visited {
 .save-btn {
   margin-top: 1.5rem;
   display: block;
-}
-
-.spacer{
-  visibility: hidden;
-  width: 100%;
-
+  border-radius: .25rem;
 }
 
 .user-title {
   text-transform: capitalize;
-}
-
-.mileage-modal-content {
-	background-color:#0a3602;
-	padding: 1.5rem .75rem;
-	border: 1px solid white;
-	border-radius: .75rem;
-	color: white;
-	text-align: center;
 }
 
 .mileage-modal-content h2, p, a {
@@ -242,18 +212,21 @@ a:visited {
   margin: auto .7rem;
 }
 
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-
+.profile-dashboard {
+  padding:auto 1.5rem;
+  background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
+  border:1px solid white;
+  border-radius: .75rem;
+  box-shadow: 3px 3px 6px black;
+  text-align: center;
 }
 
 .dashboard i {
   padding: 1rem;
-  margin: 1.2rem;
   font-size: 6rem;
   color: white;
   text-shadow:0px 0px 10px black;
+  margin: 1.2rem;
 }
 
 .dashboard p {
@@ -263,15 +236,20 @@ a:visited {
   margin-right: 1.2rem;
 }
 
-.profile-dashboard {
-  height: 92%;
-  padding:auto 1.5rem;
+.dev-info {
   background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
+  color: white;
   border:1px solid white;
   border-radius: .75rem;
   box-shadow: 3px 3px 6px black;
-  margin: auto;
+  padding: 1.25rem;
+}
+
+.dev-name {
+  font-size: 1.25rem;
+  font-weight: bold;
   text-align: center;
+  padding-bottom: .5rem;
 }
 
 .notes-box {
