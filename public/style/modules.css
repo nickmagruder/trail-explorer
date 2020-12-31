@@ -251,3 +251,8 @@ a:visited {
   text-align: center;
   padding-bottom: .5rem;
 }
+
+.notes-box {
+  width: 80%;
+  height: 20vh;
+}
