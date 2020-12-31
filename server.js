@@ -34,7 +34,6 @@ app.delete('/delete', deleteTrail);
 app.post('/edit', editSave);
 
 
-
 function getIndexpage(req, res) {
   res.render('index.ejs', { userExists: 'start' });
   //modal box for sign in or create new profile
@@ -139,7 +138,6 @@ function getSearches(req, res) {
 }
 
 function generateFavoritesPage(req, res) {
-
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
@@ -158,7 +156,7 @@ function deleteTrail(req, res) {
     .then(() => res.redirect(`/favorites/${deleteRouteUsername}`));
 }
 
-// SQL update not working yet, we might need to add the API's "trail ID" # to the schema for accessing each trail for edits
+
 function editSave(req, res) {
   const notesEdit = req.body.notes;
   const completed = req.body.completed;
@@ -171,8 +169,6 @@ function editSave(req, res) {
       const editArray = [notesEdit, completed, dateCompleted];
       const editSQL = `UPDATE favorite SET notes='${editArray[0]}', completed='${editArray[1]}', date_completed='${editArray[2]}' WHERE username='${foreignIDname}' AND trail='${trailName}'`;
       client.query(editSQL); 
-/* client.query(`SELECT * FROM favorite WHERE username='${foreignIDname}' AND trail='${trailName}'`)
-      .then(result => console.log(result)); */
       res.redirect(`/favorites/${editProfileUsername}`);
     });
 }
@@ -182,7 +178,6 @@ function getProfilePage(req, res) {
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
       const userInfo = (result.rows[0]);
-      console.log(userInfo);
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
         .then(result => {
@@ -193,8 +188,18 @@ function getProfilePage(req, res) {
 }
 
 function getCompletedPage(req, res){
-  res.render('pages/completed.ejs');
+  const ProfileUsername = req.params.username;
+  client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
+    .then(result => {
+      const foreignIDname = result.rows[0].id;
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' and completed ='completed'`)
+        .then(result => {
+          let savedTrails = result.rows;
+          res.render('pages/completed.ejs', { savedTrails: savedTrails, userInfo: ProfileUsername });
+        });
+    });
 }
+
 
 
 
