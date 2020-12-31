@@ -32,7 +32,7 @@ a:visited {
 }
 
 #user {
-  font-size:1.5rem;
+  font-size:1.2rem;
   text-shadow: 0px 0px 4px black;
   background-color: rgba(0, 0, 0, 0.7);
   border-bottom-left-radius: 2rem;
@@ -58,10 +58,10 @@ a:visited {
 }
 
 #menu ul {
-  font-size: 1.25rem;
+  font-size: .9rem;
 }
 
-#menu a {
+#menu a, li {
   color: white;
   font-weight: bold;
 }
@@ -118,22 +118,28 @@ a:visited {
 	text-align: center;
 }
 
+.trail-rating {
+  text-align: center;
+}
+
 .trail-rating i {
+  font-size: .9rem;
   color: gold;
 }
 
 .trail-name {
+  font-size: .85rem;
+  text-align: center;
   text-shadow:0px 0px 3px black;
 }
 
-.trail-id {
+.trail-city {
   font-size: .7rem;
-  font-style: italic;
+  font-style: oblique;
 }
 
-.trail-city {
-  font-size: .8rem;
-  font-style: oblique;
+.trail-length {
+  font-size: .7rem;
 }
 
 .close:hover,
@@ -148,7 +154,7 @@ a:visited {
 }
 
 .detail-modal-content h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .detail-modal-content em {
@@ -190,6 +196,7 @@ a:visited {
 
 .mileage-modal-content p {
   display: block;
+  line-height: 1.2rem;
 }
 
 .mileage-modal-content h2 {
@@ -200,16 +207,12 @@ a:visited {
   font-style: italic;
 }
 
-.mileage-modal-content button {
-  margin: 2.5rem;
-}
-
-.mileage-modal-content a {
-  color: rgb(227, 250, 23);
-}
-
-.mileage-modal-content span {
-  margin: auto .7rem;
+.miles {
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 0px 0px 3px black;
+  margin: .02rem;
+  color: rgb(250, 225, 1);
 }
 
 .profile-dashboard {
@@ -223,17 +226,18 @@ a:visited {
 
 .dashboard i {
   padding: 1rem;
-  font-size: 6rem;
+  font-size: 4.5rem;
   color: white;
   text-shadow:0px 0px 10px black;
-  margin: 1.2rem;
+  margin: .6rem;
 }
 
 .dashboard p {
   color: white;
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-shadow:0px 0px 10px black;
-  margin-right: 1.2rem;
+  margin-right: .8rem;
+  line-height: 4rem;
 }
 
 .dev-info {
@@ -257,6 +261,6 @@ a:visited {
 }
 
 .notes-box {
-  width: 80%;
-  height: 20vh;
+  width: 85%;
+  height: 12vh;
 }

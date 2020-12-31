@@ -91,7 +91,6 @@ function saveTrail(req, res) {
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND trail = '${trail.trail_name}'`)
         .then(result => {
           if(result.rowCount === 0){
-            console.log('hello');
             const sqlArray = [foreignIDname, trail.lat, trail.lon, trail.trail_name, trail.city, trail.summary, trail.difficulty, trail.rating, trail.elevation || 0, trail.distance, trail.img_url, trail.trail_url];
             const sql = 'INSERT INTO favorite (username, lat, lon, trail, city, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *';
             client.query(sql, sqlArray);
@@ -164,7 +163,7 @@ function editSave(req, res) {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
       const editSQL = `UPDATE favorite SET notes='${editArray[0]}', completed='${editArray[1]}', date_completed='${editArray[2]}' WHERE username='${foreignIDname}' AND trail='${trailName}'`;
-      client.query(editSQL); 
+      client.query(editSQL);
       res.redirect(`/favorites/${editProfileUsername}`);
     });
 }

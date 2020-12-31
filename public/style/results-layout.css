@@ -91,11 +91,11 @@ div {
 
 #menu {
   position: fixed;
-  left: 60%;
+  right: 0;
   top: 12%;
   display: none;
   float:right;
-  width: 40%;
+  width: 200px;
   height: 32.4vh;
 }
 
@@ -160,6 +160,7 @@ div {
 .trail-card {
   width: 45%;
   height: 45%;
+  max-width: 325px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
