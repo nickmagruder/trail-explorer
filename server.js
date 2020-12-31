@@ -177,12 +177,17 @@ function getProfilePage(req, res) {
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
-      const userInfo = (result.rows[0]);
+      const userInfo = result.rows[0];
+      const milesHiked = userInfo.miles_hiked;
       const foreignIDname = result.rows[0].id;
-      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND completed = 'completed'`)
         .then(result => {
-          let savedTrails = result.rows;
-          res.render('pages/profile1.ejs', { savedTrails: savedTrails, userInfo: req.params });
+          const completedHikes = result.rowCount;
+          let averageMiles = milesHiked/completedHikes;
+          if(completedHikes < 1){
+            averageMiles = 0;
+          }
+          res.render('pages/profile1.ejs', { completedHikes: completedHikes, userInfo: req.params, milesHiked: milesHiked, averageMiles: averageMiles });
         });
     });
 }

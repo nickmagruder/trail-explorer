@@ -221,3 +221,11 @@ div {
   text-align: center;
   padding-bottom: .5rem;
 }
+
+.edit-input {
+  margin: 1rem auto;
+}
+
+.checkbox {
+  display: block;
+}
