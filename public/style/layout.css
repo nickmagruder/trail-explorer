@@ -127,8 +127,9 @@ div {
 }
 
 .user-modal-content {
-  margin: 40% auto;
+  margin: 33vh auto;
   width: 75%;
+  max-width: 640px;
 }
 
 #user-exists, #user-not {
@@ -171,8 +172,10 @@ div {
 }
 
 .mileage-modal-content, .search-modal-content {
-  margin: 40% auto;
+  margin: 33% auto;
   width: 75%;
+  max-width: 640px;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -199,4 +202,22 @@ div {
   max-width: 640px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 5fr 3fr 25fr 5% 12fr 3fr;
+    grid-template-areas:
+    "a a b b b b b b b b c c"
+    "d d d d d d d d d d d d"
+    "e e e e e e e e e e e e"
+    "f f f f f f f f f f f f"
+    "g g g h h h i i i j j j"
+    "k k k k k k k k k k k k";
+  }
 }
