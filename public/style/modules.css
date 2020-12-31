@@ -184,9 +184,9 @@ a:visited {
 }
 
 .close {
-  margin: .7rem;
+  padding: .7rem;
   color:red;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
