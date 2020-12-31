@@ -187,14 +187,16 @@ div {
 /* about us page */
 
 .dev-info {
-  width: 90%;
+  width: 85%;
   height: 35vh;
   margin: 1vh auto;
+  max-width:400px;
 }
+
 
 .dev-img-l {
   float: left;
-  margin-right: 1.rem;
+  margin-right: 1rem;
   height: 100%;
   width: 48%;
   object-fit: cover;
@@ -208,4 +210,23 @@ div {
   width: 48%;
   object-fit: cover;
   border-radius: 10%;
+}
+
+@media(min-width: 400px){
+  .dev-img-l{
+    height:185px;
+    object-fit:cover;
+  }
+
+  .dev-img-r{
+    height: 185px;
+    object-fit:cover;
+  }
+
+  .dev-info {
+    width: 80%;
+    height: 35vh;
+    margin: 1vh auto;
+  }
+
 }
