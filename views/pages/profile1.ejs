@@ -49,8 +49,12 @@
               <h2><em>
                   <%= userInfo.username %>
                 </em></h2>
-              <p>Based on your completed hikes, you have hiked a total of <%= milesHiked %> miles so far.</p>
-              <p>Your average hike distance is <%= averageMiles %> miles</p>
+              <p>Based on your completed hikes, you have hiked a total of <span class="miles">
+                  <%= milesHiked %>
+                </span> miles so far.</p>
+              <p>Your average hike distance is <span class="miles">
+                  <%= averageMiles %>
+                </span> miles</p>
               <p><em>Keep going!</em></p>
               <br />
               <span class="close">&times;</span>
