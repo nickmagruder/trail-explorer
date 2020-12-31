@@ -273,3 +273,8 @@ a:visited {
   margin: auto;
   text-align: center;
 }
+
+.notes-box {
+  width: 80%;
+  height: 20vh;
+}

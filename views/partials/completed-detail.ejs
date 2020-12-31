@@ -35,17 +35,9 @@
 <% const formattedDate = fullDate.substring(0, 15); %>
 <p><%=formattedDate%></p>
 <br>
-      <label>
-        Personal notes:
-        <input type="text" name="notes" text="<%=savedTrails.notes%>">
-      </label>
-      <input type="submit" value="Save Changes" id="save-edit-btn" />
-    </form>
 
-    <form id="delete" action="/delete?_method=DELETE" method="POST">
-      <input type="hidden" name="id" value="<%=savedTrails.id%>">
-      <input type="hidden" name="username" value="<%=userInfo%>">
-      <input type="submit" value="Delete from Favorites">
+        <h3>Personal notes:</h3>
+        <p><%=savedTrails.notes%></p>
     </form>
 
     <span class="close">&times;</span>
