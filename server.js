@@ -174,7 +174,6 @@ function getProfilePage(req, res) {
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
-      const userInfo = result.rows[0];
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND completed = 'completed'`)
         .then(result => {
@@ -187,7 +186,7 @@ function getProfilePage(req, res) {
           if(completedHikes < 1){
             averageMiles = 0;
           }
-          res.render('pages/profile1.ejs', { completedHikes: completedHikes, userInfo: req.params, milesHiked: milesHiked, averageMiles: averageMiles });
+          res.render('pages/profile1.ejs', { completedHikes: completedHikes, userInfo: req.params, milesHiked: milesHiked.toFixed(2), averageMiles: averageMiles.toFixed(2) });
         });
     });
 }

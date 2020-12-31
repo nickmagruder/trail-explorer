@@ -85,6 +85,7 @@ Codefellows TA's Brai, Chance, and Bade
 Codefellows .eslintrc.json and .gitignore frameworks
 W3Schools
 Unsplash
+Font Awesome
 Medium
 Heroku
 Miro
