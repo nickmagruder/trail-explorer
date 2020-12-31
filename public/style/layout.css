@@ -96,11 +96,11 @@ div {
 
 #menu {
   position: fixed;
-  left: 60%;
+  right: 0;
   top: 12%;
   display: none;
   float:right;
-  width: 40%;
+  width: 200px;
   height: 32.4vh;
 }
 
@@ -189,12 +189,14 @@ div {
 
 /* profile */
 
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
+.profile-dashboard {
+  height: 88%;
+  margin: auto;
 }
 
-.profile-dashboard {
-  height: 92%;
-  margin: auto;
+.dashboard-container {
+  width: 84vw;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
 }
