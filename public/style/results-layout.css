@@ -36,18 +36,18 @@ div {
   align-items: center;
 }
 
+/* grid assignments */
+
+#icon {
+  grid-area: a;
+}
+  
 #heading {
   grid-area: b;
 }
 
-#icon {
-  grid-area: a;
-
-}
-
 #menu-btn {
   grid-area: c;
-
 }
 
 #user {
@@ -63,8 +63,18 @@ div {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
+  
 }
+
+.about-us {
+  grid-area: e;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* footer */
 
 #foot {
   width: 100vw;
@@ -76,6 +86,8 @@ div {
   flex-direction: row;
   justify-content: space-around;
 }
+
+/* navigation menu */
 
 #menu {
   position: fixed;
@@ -96,20 +108,9 @@ div {
   align-items: center;
 }
 
-.about-us {
-  grid-area: e;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+/* modals */
 
-}
-
-.modal-btn {
-  margin-top: 1.5rem;
-}
-
-#search-modal {
+#search-modal, #detail-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -120,9 +121,13 @@ div {
   overflow: auto;
 }
 
-.search-modal-content {
+.search-modal-content, .detail-modal-content {
   margin: 40% auto;
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .search-modal-content input {
@@ -132,6 +137,25 @@ div {
 .search-modal-content span {
   margin: auto .7rem;
 }
+
+#detail-content img {
+  width: 50%;
+  object-fit: cover;
+}
+
+.edit-input {
+  margin: 1rem auto;
+}
+
+.checkbox {
+  display: block;
+}
+
+.modal-btn {
+  margin-top: 1.5rem;
+}
+
+/* trail cards for results, favorites, completed */
 
 .trail-card {
   width: 45%;
@@ -155,51 +179,21 @@ div {
 
 .spacer {
   height: 6vh;
-}
-
-#detail-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+  visibility: hidden;
   width: 100%;
-  height: 100%;
-  overflow: auto;
 }
 
-#detail-content img {
-  width: 50%;
-  object-fit: cover;
-}
-
-.detail-modal-content {
-  margin: 40% auto;
-  width: 75%;
-}
-
-.detail-modal-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
+/* about us page */
 
 .dev-info {
   width: 90%;
   height: 24vh;
-  background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
-  color: white;
-  border:1px solid white;
-  border-radius: .75rem;
-  box-shadow: 3px 3px 6px black;
   margin: 1vh auto;
-  padding: 1.25rem;
 }
 
-.dev-img-l {
+.dev-img {
   float: left;
-  margin-right: 2rem;
+  margin-right: 1rem;
   height: 100%;
   width: 48%;
   object-fit: cover;
@@ -208,24 +202,5 @@ div {
 
 .dev-img-r {
   float: right;
-  margin-left: 2rem;
-  height: 100%;
-  width: 48%;
-  object-fit: cover;
-  border-radius: 10%;
-}
-
-.dev-name {
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: .5rem;
-}
-
-.edit-input {
-  margin: 1rem auto;
-}
-
-.checkbox {
-  display: block;
+  margin-left: 1rem;
 }

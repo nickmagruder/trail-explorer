@@ -1,0 +1,13 @@
+<div id="search-modal" class="modal">
+  <div id="search-content" class="search-modal-content">
+    <form id="search-form" action="/search" method="GET">
+      <label>Search Location<br />
+        <input type="text" name="location" value="<%= userInfo.city %>,<%= userInfo.us_state %>" />
+      </label><br>
+      <input type="hidden" name="userInfo" value="<%= userInfo.username %>">
+      <input type="submit" value="Search Now" class="modal-btn" />
+    </form>
+    <span class="close">&times;</span>
+  </div>
+
+</div>
