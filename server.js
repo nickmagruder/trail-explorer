@@ -7,23 +7,21 @@ const methodOverride = require('method-override');
 require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 9999;
+const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', error => console.error(error));
-
-const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 
 app.use(methodOverride('_method'));
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+//Paths
 app.get('/', getIndexpage);
 app.post('/home', createProfile);
 app.post('/home/existing', getProfile);
 app.get('/home/:username', getHomepage);
-// app.delete('/favorites/delete', deleteTrail);
-// app.put('/favorites/update', updateTrail);
 app.get('/search', getSearches);
 app.post('/search/save', saveTrail);
 app.get('/favorites/:username', generateFavoritesPage);
@@ -33,23 +31,24 @@ app.get('/completed/:username', getCompletedPage);
 app.delete('/delete', deleteTrail);
 app.post('/edit', editSave);
 
+//Path callback functions
 
+//Landing page rendering
 function getIndexpage(req, res) {
   res.render('index.ejs', { userExists: 'start' });
-  //modal box for sign in or create new profile
-  //render new homepage with customized name and options
 }
 
+//Homepage rendering
 function getHomepage(req, res) {
   res.render('pages/home.ejs', { userInfo: req.params });
-  //modal box for sign in or create new profile
-  //render new homepage with customized name and options
 }
 
+//About us page rendering
 function getAboutUs(req, res) {
   res.render('pages/about_us.ejs', { userInfo: req.params });
 }
 
+//Profile creation
 function createProfile(req, res) {
   const user = req.body;
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
@@ -67,6 +66,7 @@ function createProfile(req, res) {
     });
 }
 
+//Existing profile login
 function getProfile(req, res) {
   const user = req.body;
   client.query(`SELECT * FROM userID WHERE username = '${user.username}'`)
@@ -80,9 +80,8 @@ function getProfile(req, res) {
     });
 }
 
+//Saving trail from search to user favorites
 function saveTrail(req, res) {
-  //save trail to sql database for user profile
-  //repopulate search page
   const trail = req.body;
   const location = req.body.location;
   const ProfileUsername = trail.username;
@@ -91,27 +90,20 @@ function saveTrail(req, res) {
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND trail = '${trail.trail_name}'`)
         .then(result => {
-          console.log(result.rowCount);
           if(result.rowCount === 0){
-            console.log('new');
+            console.log('hello');
             const sqlArray = [foreignIDname, trail.lat, trail.lon, trail.trail_name, trail.city, trail.summary, trail.difficulty, trail.rating, trail.elevation || 0, trail.distance, trail.img_url, trail.trail_url];
             const sql = 'INSERT INTO favorite (username, lat, lon, trail, city, summary, difficulty, rating, elevation, distance, img_url, trail_url ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *';
             client.query(sql, sqlArray);
             res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
           }else{
-            console.log('exists');
             res.redirect(`/search?location=${location}&userInfo=${ProfileUsername}`);
           }
         });
     });
 }
 
-function updateTrail(req, res) {
-  //update trail information
-}
-
-
-
+//Search result rendering
 function getSearches(req, res) {
   const query = req.query.location;
   const queryUser = req.query.userInfo;
@@ -137,6 +129,7 @@ function getSearches(req, res) {
     });
 }
 
+//Favorite hikes page rendering
 function generateFavoritesPage(req, res) {
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
@@ -150,17 +143,20 @@ function generateFavoritesPage(req, res) {
     });
 }
 
+//Deleting trail from favorites
 function deleteTrail(req, res) {
   const deleteRouteUsername = req.body.username;
   return client.query('DELETE FROM favorite WHERE id=$1', [req.body.id])
     .then(() => res.redirect(`/favorites/${deleteRouteUsername}`));
 }
 
-
+//Completed hike functionality
 function editSave(req, res) {
-  const notesEdit = req.body.notes;
+  const notesEdit = req.body.notes || '';
   const completed = req.body.completed;
-  const dateCompleted = req.body.date_completed;
+  const d = new Date();
+  const backupDate = d.toISOString().split('T')[0];
+  const dateCompleted = req.body.date_completed || backupDate;
   const editProfileUsername = req.body.username;
   const trailName = req.body.trail_name;
   client.query(`SELECT * FROM userID WHERE username = '${editProfileUsername}'`)
@@ -173,16 +169,20 @@ function editSave(req, res) {
     });
 }
 
+//Profile page rendering
 function getProfilePage(req, res) {
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
       const userInfo = result.rows[0];
-      const milesHiked = userInfo.miles_hiked;
       const foreignIDname = result.rows[0].id;
       client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND completed = 'completed'`)
         .then(result => {
           const completedHikes = result.rowCount;
+          let milesHiked = 0;
+          result.rows.forEach(trail => {
+            return milesHiked+=Number(trail.distance);
+          });
           let averageMiles = milesHiked/completedHikes;
           if(completedHikes < 1){
             averageMiles = 0;
@@ -192,6 +192,7 @@ function getProfilePage(req, res) {
     });
 }
 
+//Completed hikes page rendering
 function getCompletedPage(req, res){
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
@@ -231,9 +232,6 @@ function TrailConstructor(trailObject) {
   this.difficulty = trailObject.difficulty;
   this.trail_url = trailObject.url;
   this.img_url = trailObject.imgMedium;
-  /*   this.conditions = trailObject.conditionDetails;
-    this.condition_date = trailObject.conditionDate.slice(0, 10);
-    this.condition_time = trailObject.conditionDate.slice(11); */
 }
 
 
