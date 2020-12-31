@@ -242,14 +242,18 @@ a:visited {
   border:1px solid white;
   border-radius: .75rem;
   box-shadow: 3px 3px 6px black;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .dev-name {
-  font-size: 1.25rem;
+  font-size: 1.00rem;
   font-weight: bold;
   text-align: center;
   padding-bottom: .5rem;
+}
+
+.dev-about{
+  font-size:0.75rem;
 }
 
 .notes-box {
