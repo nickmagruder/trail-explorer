@@ -184,9 +184,9 @@ a:visited {
 }
 
 .close {
-  margin: .7rem;
+  padding: .7rem;
   color:red;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
@@ -242,6 +242,12 @@ a:visited {
   margin: auto .7rem;
 }
 
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
 .dashboard i {
   padding: 1rem;
   margin: 1.2rem;
@@ -252,7 +258,18 @@ a:visited {
 
 .dashboard p {
   color: white;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-shadow:0px 0px 10px black;
+  margin-right: 1.2rem;
+}
 
+.profile-dashboard {
+  height: 92%;
+  padding:auto 1.5rem;
+  background-image: radial-gradient( #0a3602e8, rgba(0, 0, 0, 0.9));
+  border:1px solid white;
+  border-radius: .75rem;
+  box-shadow: 3px 3px 6px black;
+  margin: auto;
+  text-align: center;
 }

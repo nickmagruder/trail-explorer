@@ -94,6 +94,9 @@ div {
 }
 
 #menu {
+  position: fixed;
+  left: 60%;
+  top: 12%;
   display: none;
   float:right;
   width: 40%;
@@ -239,4 +242,8 @@ div {
 
 .mileage-modal-content span {
   margin: auto .7rem;
+}
+
+.favorite-modal-content input {
+  margin: .5rem auto;
 }

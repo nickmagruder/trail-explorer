@@ -170,8 +170,8 @@ function editSave(req, res) {
       const foreignIDname = result.rows[0].id;
       const editArray = [notesEdit, completed, dateCompleted];
       const editSQL = `UPDATE favorite SET notes='${editArray[0]}', completed='${editArray[1]}', date_completed='${editArray[2]}' WHERE username='${foreignIDname}' AND trail='${trailName}'`;
-      client.query(editSQL); 
-/* client.query(`SELECT * FROM favorite WHERE username='${foreignIDname}' AND trail='${trailName}'`)
+      client.query(editSQL);
+      /* client.query(`SELECT * FROM favorite WHERE username='${foreignIDname}' AND trail='${trailName}'`)
       .then(result => console.log(result)); */
       res.redirect(`/favorites/${editProfileUsername}`);
     });
@@ -181,13 +181,17 @@ function getProfilePage(req, res) {
   const ProfileUsername = req.params.username;
   client.query(`SELECT * FROM userID WHERE username = '${ProfileUsername}'`)
     .then(result => {
-      const userInfo = (result.rows[0]);
-      console.log(userInfo);
+      const userInfo = result.rows[0];
+      const milesHiked = userInfo.miles_hiked;
       const foreignIDname = result.rows[0].id;
-      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}'`)
+      client.query(`SELECT * FROM favorite WHERE username = '${foreignIDname}' AND completed = 'completed'`)
         .then(result => {
-          let savedTrails = result.rows;
-          res.render('pages/profile1.ejs', { savedTrails: savedTrails, userInfo: req.params });
+          const completedHikes = result.rowCount;
+          let averageMiles = milesHiked/completedHikes;
+          if(completedHikes < 1){
+            averageMiles = 0;
+          }
+          res.render('pages/profile1.ejs', { completedHikes: completedHikes, userInfo: req.params, milesHiked: milesHiked, averageMiles: averageMiles });
         });
     });
 }
