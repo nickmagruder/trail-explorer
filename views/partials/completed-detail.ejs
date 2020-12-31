@@ -28,15 +28,16 @@
       <input type="hidden" name="trail_url" value="<%=savedTrails.trail_url%>" />
       <input type="hidden" name="img_url" value="<%=savedTrails.img_url%>" />
 
+<p>Date Hiked:</p>
+<br>
+
+<% const fullDate = savedTrails.date_completed.toString(); %>
+<% const formattedDate = fullDate.substring(0, 15); %>
+<p><%=formattedDate%></p>
+<br>
       <label>
         Personal notes:
         <input type="text" name="notes" text="<%=savedTrails.notes%>">
-      </label>
-      <input type="checkbox" id="completed" name="completed" value="completed">
-      <label for="completed">I have done this hike!</label><br>
-      <label>
-        Date Hiked:
-        <input type="date" name="date_completed">
       </label>
       <input type="submit" value="Save Changes" id="save-edit-btn" />
     </form>

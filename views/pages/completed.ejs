@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style/results-layout.css">
     <link rel="stylesheet" href="../style/modules.css">
     <script src="https://kit.fontawesome.com/4fc1b5d5ea.js" crossorigin="anonymous"></script>
-    <title>Favorite Trails</title>
+    <title>Completed Hikes</title>
   </head>
 
 
@@ -19,16 +19,13 @@
     </header>
     <main>
       <div id="user"><em class="user-title">
-          <%= userInfo %>'s favorites
+          Completed Hikes for <%= userInfo %>
         </em></div>
 
       <%- include('../partials/navigation', {userInfo: userInfo}) %>
         <section id="upper-img" class="search-results">
-
           <% savedTrails.forEach((savedTrails)=> { %>
-            <%- include('../partials/favorite-trail-card', {savedTrails: savedTrails}) %>
-
-
+            <%- include('../partials/completed-trail-card', {savedTrails: savedTrails}) %>
               <% }) %>
                 <div class="trail-card spacer"></div>
         </section>
